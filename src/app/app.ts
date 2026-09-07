@@ -1,8 +1,8 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuBarComponent } from './layout/menu-bar/menu-bar';
-import { PorfolioStateService } from './core/portfolio-state.service';
-import { ThemeService } from './core/theme.servie';
+import { PortfolioStateService } from './core/portfolio-state.service';
+import { ThemeService } from './core/theme.service';
 
 @Component({
   imports: [
@@ -14,7 +14,7 @@ import { ThemeService } from './core/theme.servie';
   templateUrl: './app.html',
 })
 export class App {
-  readonly state = inject(PorfolioStateService);
+  readonly state = inject(PortfolioStateService);
   readonly theme = inject(ThemeService)
 
   protected readonly title = signal('portfolio');

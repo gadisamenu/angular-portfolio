@@ -3,7 +3,7 @@ import { Injectable, signal } from "@angular/core";
 export type WindowType = | 'finder' | 'project' | 'resume' | 'availability';
 
 @Injectable({ providedIn: 'root'})
-export class PorfolioStateService {
+export class PortfolioStateService {
     readonly activeWindow = signal<WindowType | null>(null);
     readonly selectedProject = signal<Project | null> (null);
     readonly activeSection = signal('home');
