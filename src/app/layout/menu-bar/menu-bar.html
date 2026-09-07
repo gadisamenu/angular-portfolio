@@ -1,0 +1,133 @@
+<header class="mac-menu-bar">
+
+  <!-- LEFT -->
+  <div class="mac-menu-left">
+
+    <!-- Apple -->
+    <button
+      class="apple-button"
+      type="button"
+      aria-label="Apple menu"
+      (click)="toggleMenu($event, 'Finder')"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.3-.35C2.79 15.25 3.51 7.59 8.8 7.31c1.29.07 2.19.71 2.96.77 1.15-.23 2.25-.87 3.48-.82 1.48.12 2.6.71 3.34 1.8-3.06 1.83-2.34 5.86.47 6.98-.56 1.48-1.29 2.95-2 4.24ZM12.03 7.25C11.88 5.05 13.67 3.24 15.73 3c.29 2.54-2.3 4.43-3.7 4.25Z"
+        />
+      </svg>
+    </button>
+
+
+    @for (menu of menus; track menu.label) {
+
+      <div class="mac-menu-item">
+
+        <button
+          type="button"
+          class="mac-menu-button"
+          [class.active]="activeMenu() === menu.label"
+          (click)="toggleMenu($event, menu.label)"
+        >
+          {{ menu.label }}
+        </button>
+
+
+        @if (activeMenu() === menu.label) {
+
+          <div
+            class="mac-dropdown"
+            (click)="$event.stopPropagation()"
+          >
+
+            @for (item of menu.items; track $index) {
+
+              @if (item.separator) {
+
+                <div class="mac-separator"></div>
+
+              } @else {
+
+                <button
+                  type="button"
+                  class="mac-dropdown-item"
+                  [class.disabled]="item.disabled"
+                  [disabled]="item.disabled"
+                  (click)="execute($event, item)"
+                >
+
+                  <span class="menu-label">
+                    {{ item.label }}
+                  </span>
+
+                  @if (item.shortcut) {
+                    <span class="menu-shortcut">
+                      {{ item.shortcut }}
+                    </span>
+                  }
+
+                </button>
+
+              }
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- RIGHT -->
+  <div class="mac-menu-right">
+
+    <!-- WiFi -->
+    <button
+      class="system-button"
+      aria-label="Wi-Fi"
+      type="button"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M2 8.5a16 16 0 0 1 20 0" />
+        <path d="M5.5 12a10.5 10.5 0 0 1 13 0" />
+        <path d="M9 15.5a5 5 0 0 1 6 0" />
+        <circle cx="12" cy="19" r="1" />
+      </svg>
+    </button>
+
+
+    <!-- Search -->
+    <button
+      class="system-button"
+      aria-label="Search"
+      type="button"
+    >
+      <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="6.5" />
+        <path d="m16 16 4 4" />
+      </svg>
+    </button>
+
+
+    <!-- Battery -->
+    <div class="battery">
+      <svg viewBox="0 0 28 16">
+        <rect x="1" y="2" width="23" height="12" rx="3" />
+        <rect x="3.5" y="4.5" width="17" height="7" rx="1.5" />
+        <path d="M26 6v4" />
+      </svg>
+    </div>
+
+
+    <!-- Clock -->
+    <div class="system-time">
+      {{ currentTime() | date:'EEE h:mm a' }}
+    </div>
+
+  </div>
+
+</header>
