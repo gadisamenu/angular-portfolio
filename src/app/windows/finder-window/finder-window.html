@@ -1,0 +1,53 @@
+<div class="window-backdrop" (click)="close()">
+  <section class="finder-window" role="dialog" aria-label="All projects" (click)="$event.stopPropagation()">
+    <header class="finder-window__titlebar">
+      <span class="traffic-lights">
+        <span class="red" (click)="close()"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </span>
+      <span class="finder-window__title">All Projects</span>
+      <button type="button" class="finder-window__close" (click)="close()" aria-label="Close">
+        <ng-icon name="lucideX" size="14" />
+      </button>
+    </header>
+
+    <div class="finder-window__body">
+      <aside class="finder-window__sidebar">
+        <p class="finder-window__sidebar-label">Favorites</p>
+        <div class="finder-window__sidebar-item finder-window__sidebar-item--active">
+          <ng-icon name="lucideFolder" size="14" />
+          <span>All Projects</span>
+        </div>
+        <div class="finder-window__sidebar-item">
+          <ng-icon name="lucideStar" size="14" />
+          <span>Featured</span>
+        </div>
+        <div class="finder-window__sidebar-item">
+          <ng-icon name="lucideClock" size="14" />
+          <span>Recent</span>
+        </div>
+      </aside>
+
+      <div class="finder-window__main">
+        <div class="finder-window__toolbar">
+          <span>{{ state.projects.length }} items</span>
+          <div class="finder-window__view-toggle">
+            <ng-icon name="lucideLayoutGrid" size="14" />
+            <ng-icon name="lucideList" size="14" />
+          </div>
+        </div>
+
+        <div class="finder-window__grid">
+          @for (project of state.projects; track project.id) {
+            <button type="button" class="finder-file" (click)="select(project)">
+              <span class="finder-file__thumb" [attr.data-variant]="project.image"></span>
+              <span class="finder-file__name">{{ project.title }}</span>
+              <span class="finder-file__meta">{{ project.tags.join(', ') }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
