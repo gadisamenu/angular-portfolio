@@ -1,0 +1,92 @@
+.experience {
+  padding: 28px 28px 30px;
+  height: 100%;
+  box-shadow: var(--shadow-card);
+  scroll-margin-top: var(--section-scroll-offset);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+
+    h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+
+  &__timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  &__item {
+    display: flex;
+    gap: 14px;
+    position: relative;
+
+    &:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 16px;
+      bottom: -22px;
+      width: 1px;
+      background: var(--border-subtle);
+    }
+  }
+
+  &__marker {
+    flex-shrink: 0;
+    margin-top: 5px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+
+    &--current {
+      background: var(--accent-b);
+      box-shadow: 0 0 0 4px rgba(79, 139, 255, 0.16);
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+
+    h3 {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+
+  &__period {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+
+  &__company {
+    margin-top: 2px;
+    font-size: 13px;
+    color: var(--accent-b);
+    font-weight: 500;
+  }
+
+  &__desc {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+}

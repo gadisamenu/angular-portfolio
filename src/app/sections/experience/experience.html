@@ -1,0 +1,22 @@
+<section id="experience" class="experience glass-panel">
+  <header class="experience__header">
+    <ng-icon name="lucideBriefcase" size="16" />
+    <h2>Experience</h2>
+  </header>
+
+  <ol class="experience__timeline">
+    @for (item of state.experience; track item.id) {
+      <li class="experience__item">
+        <span class="experience__marker" [class.experience__marker--current]="item.current"></span>
+        <div class="experience__content">
+          <div class="experience__row">
+            <h3>{{ item.role }}</h3>
+            <span class="experience__period">{{ item.period }}</span>
+          </div>
+          <p class="experience__company">{{ item.company }}</p>
+          <p class="experience__desc">{{ item.description }}</p>
+        </div>
+      </li>
+    }
+  </ol>
+</section>
