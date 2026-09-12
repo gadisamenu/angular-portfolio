@@ -1,0 +1,64 @@
+<section id="home" class="hero">
+  <div class="hero__scenery" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <h1 class="hero__title">
+        Hi, I'm <span class="hero__title-accent">{{ state.profile.firstName }}</span>.<br />
+        I build reliable products<br />
+        across web, backend, and AI.
+      </h1>
+      <p class="hero__subtitle">
+        {{ state.profile.subtitle }}
+      </p>
+
+      <div class="hero__actions">
+        <button type="button" class="hero__btn hero__btn--primary" (click)="viewWork()">
+          View my work
+          <ng-icon name="lucideArrowRight" size="15" />
+        </button>
+        <button type="button" class="hero__btn hero__btn--secondary" (click)="downloadResume()">
+          Download resume
+        </button>
+      </div>
+    </div>
+
+    <div class="hero__card">
+      <div class="hero__card-titlebar">
+        <span class="traffic-lights">
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        </span>
+      </div>
+
+      <div class="hero__card-body">
+        <div class="hero__avatar-ring">
+          <div class="hero__avatar">{{ state.profile.initials }}</div>
+        </div>
+
+        <h2 class="hero__card-name">{{ state.profile.title }}</h2>
+        <button type="button" class="hero__card-status" (click)="showAvailability()">
+          <span>Based in {{ state.profile.location }}</span>
+          <span class="hero__card-dot" aria-hidden="true"></span>
+          <span>Available for work</span>
+        </button>
+
+        <div class="hero__social">
+          <a class="hero__social-btn" [href]="state.profile.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <ng-icon name="ionLogoGithub" size="16" />
+          </a>
+          <a class="hero__social-btn" [href]="state.profile.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <ng-icon name="ionLogoLinkedin" size="16" />
+          </a>
+          <a class="hero__social-btn" [href]="state.profile.leetcode" target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+            <ng-icon name="lucideBinary" size="16" />
+          </a>
+          <a class="hero__social-btn" [href]="'mailto:' + state.profile.email" aria-label="Email">
+            <ng-icon name="lucideMail" size="16" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
