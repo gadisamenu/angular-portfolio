@@ -1,0 +1,52 @@
+@if (state.activeProject(); as project) {
+  <div class="window-backdrop" (click)="close()">
+    <section class="project-window" role="dialog" [attr.aria-label]="project.title" (click)="$event.stopPropagation()">
+      <header class="project-window__titlebar">
+        <span class="traffic-lights">
+          <span class="red" (click)="close()"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        </span>
+
+        <div class="project-window__address">
+          <ng-icon name="lucideLock" size="11" />
+          <span>gadisaamenu.dev/work/{{ project.id }}</span>
+        </div>
+      </header>
+
+      <div class="project-window__toolbar">
+        <button type="button" class="project-window__back" (click)="backToAll()">
+          <ng-icon name="lucideArrowLeft" size="14" />
+          All projects
+        </button>
+      </div>
+
+      <div class="project-window__preview" [attr.data-variant]="project.image"></div>
+
+      <div class="project-window__body">
+        <div class="project-window__tags">
+          @for (tag of project.tags; track tag) {
+            <span>{{ tag }}</span>
+          }
+        </div>
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.longDescription }}</p>
+
+        <div class="project-window__actions">
+          @if (project.liveUrl) {
+            <a class="project-window__btn project-window__btn--primary" [href]="project.liveUrl">
+              Visit live site
+              <ng-icon name="lucideExternalLink" size="14" />
+            </a>
+          }
+          @if (project.repoUrl) {
+            <a class="project-window__btn" [href]="project.repoUrl">
+              <ng-icon name="ionLogoGithub" size="14" />
+              View source
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+}

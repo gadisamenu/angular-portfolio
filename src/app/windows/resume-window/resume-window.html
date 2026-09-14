@@ -1,0 +1,59 @@
+<div class="window-backdrop" (click)="close()">
+  <section class="resume-window" role="dialog" aria-label="Resume preview" (click)="$event.stopPropagation()">
+    <header class="resume-window__titlebar">
+      <span class="traffic-lights">
+        <span class="red" (click)="close()"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </span>
+      <span class="resume-window__title">{{ state.profile.resumeFileName }}</span>
+      <div class="resume-window__tools">
+        <ng-icon name="lucidePrinter" size="15" />
+        <a class="resume-window__download" [href]="state.profile.resumeUrl" [download]="state.profile.resumeFileName">
+          <ng-icon name="lucideDownload" size="14" />
+          Download
+        </a>
+      </div>
+    </header>
+
+    <div class="resume-window__page">
+      <div class="resume-window__page-header">
+        <h2>{{ state.profile.name }}</h2>
+        <p>{{ state.profile.title }} — Based in {{ state.profile.location }}</p>
+        <p>{{ state.profile.email }} · {{ state.profile.phone }}</p>
+      </div>
+
+      <div class="resume-window__section">
+        <h3>Summary</h3>
+        <p class="resume-window__entry-desc">{{ state.profile.subtitle }}</p>
+      </div>
+
+      <div class="resume-window__section">
+        <h3>Experience</h3>
+        @for (item of state.experience; track item.id) {
+          <div class="resume-window__entry">
+            <p class="resume-window__entry-title">{{ item.role }}, {{ item.company }}</p>
+            <p class="resume-window__entry-period">{{ item.period }}</p>
+            <p class="resume-window__entry-desc">{{ item.description }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="resume-window__section">
+        <h3>Education</h3>
+        @for (item of state.education; track item.id) {
+          <div class="resume-window__entry">
+            <p class="resume-window__entry-title">{{ item.degree }}</p>
+            <p class="resume-window__entry-period">{{ item.school }} · {{ item.period }}</p>
+            <p class="resume-window__entry-desc">{{ item.description }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="resume-window__section">
+        <h3>Skills</h3>
+        <p class="resume-window__skills-line">{{ state.resumeSkills }}</p>
+      </div>
+    </div>
+  </section>
+</div>

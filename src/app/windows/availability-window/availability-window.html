@@ -1,0 +1,30 @@
+<div class="window-backdrop" (click)="close()">
+  <section class="availability-window" role="dialog" aria-label="Availability status" (click)="$event.stopPropagation()">
+    <header class="availability-window__titlebar">
+      <span class="traffic-lights">
+        <span class="red" (click)="close()"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </span>
+    </header>
+
+    <div class="availability-window__body">
+      <span class="availability-window__badge">
+        <ng-icon name="lucideCircleCheck" size="22" />
+      </span>
+      <h3>Available for work</h3>
+      <p>{{ state.profile.availability }}</p>
+
+      <ul class="availability-window__facts">
+        <li>
+          <ng-icon name="lucideMapPin" size="14" />
+          <span>Based in Ethiopia (GMT+3)</span>
+        </li>
+        <li>
+          <ng-icon name="lucideClock3" size="14" />
+          <span>Usually responds within a day</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
