@@ -29,4 +29,8 @@ export class Hero {
   showAvailability(): void {
     this.state.openWindow('availability');
   }
+
+  openPhoto(): void {
+    this.state.openWindow('preview');
+  }
 }

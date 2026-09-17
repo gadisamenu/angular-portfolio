@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-export type WindowId = 'finder' | 'project' | 'resume' | 'availability';
+export type WindowId = 'finder' | 'project' | 'resume' | 'availability' | 'preview';
 
 export interface Project {
   id: string;
@@ -60,6 +60,8 @@ export const PROFILE = {
   leetcode: 'https://leetcode.com/gadisamenu',
   resumeUrl: '/GadisaAmenuCV.pdf',
   resumeFileName: 'GadisaAmenuCV.pdf',
+  avatarUrl: '/images/avatar.jpg',
+  avatarFileName: 'avatar.jpg',
   subtitle:
     'Full stack developer and Software Engineering graduate specializing in AI from Addis Ababa Institute of Technology.',
   aboutHeading: 'I turn complex problems into working products.',

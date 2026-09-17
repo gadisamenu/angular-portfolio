@@ -12,6 +12,7 @@ import { FinderWindow } from './windows/finder-window/finder-window';
 import { ProjectWindow } from './windows/project-window/project-window';
 import { ResumeWindow } from './windows/resume-window/resume-window';
 import { AvailabilityWindow } from './windows/availability-window/availability-window';
+import { PreviewWindow } from './windows/preview-window/preview-window';
 import { PortfolioStateService } from './core/portfolio-state.service';
 
 @Component({
@@ -30,6 +31,7 @@ import { PortfolioStateService } from './core/portfolio-state.service';
     ProjectWindow,
     ResumeWindow,
     AvailabilityWindow,
+    PreviewWindow,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

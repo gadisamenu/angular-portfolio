@@ -33,9 +33,16 @@
       </div>
 
       <div class="hero__card-body">
-        <div class="hero__avatar-ring">
-          <div class="hero__avatar">{{ state.profile.initials }}</div>
-        </div>
+        <button
+          type="button"
+          class="hero__avatar-ring"
+          (click)="openPhoto()"
+          [attr.aria-label]="'View photo of ' + state.profile.name"
+        >
+          <div class="hero__avatar">
+            <img [src]="state.profile.avatarUrl" alt="" />
+          </div>
+        </button>
 
         <h2 class="hero__card-name">{{ state.profile.title }}</h2>
         <button type="button" class="hero__card-status" (click)="showAvailability()">

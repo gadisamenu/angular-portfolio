@@ -1,0 +1,16 @@
+<div class="window-backdrop" (click)="close()">
+  <section class="preview-window" role="dialog" [attr.aria-label]="state.profile.name" (click)="$event.stopPropagation()">
+    <header class="preview-window__titlebar">
+      <span class="traffic-lights">
+        <span class="red" (click)="close()"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </span>
+      <span class="preview-window__title">{{ state.profile.avatarFileName }}</span>
+    </header>
+
+    <div class="preview-window__body">
+      <img [src]="state.profile.avatarUrl" [alt]="state.profile.name" />
+    </div>
+  </section>
+</div>
