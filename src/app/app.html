@@ -1,9 +1,37 @@
-<!-- [class.light-mode]="!state.isDarkMode()"  -->
-<div
-  class="min-h-screen bg-[#050510] "
-  style="background: url(/images/background.png);"
->
-  <!-- macOS menu bar -->
-   <app-menu-bar />
+<app-menu-bar />
 
-</div>
+<main class="desktop">
+  <app-portfolio-nav />
+
+  <app-hero />
+
+  <div class="desktop__content">
+    <app-about />
+    <app-projects />
+
+    <div class="desktop__row">
+      <app-skills-section />
+      <app-experience />
+    </div>
+
+    <app-contact />
+  </div>
+
+  <footer class="desktop__footer">
+    <p>© 2026 Gadisa Amenu. All rights reserved.</p>
+    <p class="desktop__footer-credit">Built with <span class="heart">♥</span> and Angular</p>
+  </footer>
+</main>
+
+@if (state.activeWindow() === 'finder') {
+  <app-finder-window />
+}
+@if (state.activeWindow() === 'project') {
+  <app-project-window />
+}
+@if (state.activeWindow() === 'resume') {
+  <app-resume-window />
+}
+@if (state.activeWindow() === 'availability') {
+  <app-availability-window />
+}

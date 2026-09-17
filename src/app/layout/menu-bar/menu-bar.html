@@ -1,133 +1,101 @@
-<header class="mac-menu-bar">
+<header class="menu-bar">
+  <div class="menu-bar__left">
+    <div class="menu-bar__menu">
+      <button
+        type="button"
+        class="menu-bar__apple"
+        (click)="toggleMenu('apple')"
+        [class.menu-bar__item--active]="activeMenu() === 'apple'"
+        aria-label="Apple menu"
+      >
+        <ng-icon name="ionLogoApple" size="16" />
+      </button>
 
-  <!-- LEFT -->
-  <div class="mac-menu-left">
+      @if (activeMenu() === 'apple') {
+        <div class="menu-bar__dropdown">
+          <button type="button" (click)="openAbout()">About This Portfolio</button>
+          <button type="button" (click)="openResume()">Resume…</button>
+          <hr />
+          <button type="button" (click)="setTheme(theme.theme() === 'dark' ? 'light' : 'dark')">
+            {{ theme.theme() === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}
+          </button>
+          <hr />
+          <button type="button" (click)="scrollToTop()">Restart</button>
+        </div>
+      }
+    </div>
 
-    <!-- Apple -->
-    <button
-      class="apple-button"
-      type="button"
-      aria-label="Apple menu"
-      (click)="toggleMenu($event, 'Finder')"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.3-.35C2.79 15.25 3.51 7.59 8.8 7.31c1.29.07 2.19.71 2.96.77 1.15-.23 2.25-.87 3.48-.82 1.48.12 2.6.71 3.34 1.8-3.06 1.83-2.34 5.86.47 6.98-.56 1.48-1.29 2.95-2 4.24ZM12.03 7.25C11.88 5.05 13.67 3.24 15.73 3c.29 2.54-2.3 4.43-3.7 4.25Z"
-        />
-      </svg>
-    </button>
-
-
-    @for (menu of menus; track menu.label) {
-
-      <div class="mac-menu-item">
-
+    @for (menu of menus; track menu.id) {
+      <div class="menu-bar__menu">
         <button
           type="button"
-          class="mac-menu-button"
-          [class.active]="activeMenu() === menu.label"
-          (click)="toggleMenu($event, menu.label)"
+          class="menu-bar__item"
+          [class.menu-bar__item--active]="activeMenu() === menu.id"
+          (click)="toggleMenu(menu.id)"
         >
           {{ menu.label }}
         </button>
 
-
-        @if (activeMenu() === menu.label) {
-
-          <div
-            class="mac-dropdown"
-            (click)="$event.stopPropagation()"
-          >
-
-            @for (item of menu.items; track $index) {
-
-              @if (item.separator) {
-
-                <div class="mac-separator"></div>
-
-              } @else {
-
-                <button
-                  type="button"
-                  class="mac-dropdown-item"
-                  [class.disabled]="item.disabled"
-                  [disabled]="item.disabled"
-                  (click)="execute($event, item)"
-                >
-
-                  <span class="menu-label">
-                    {{ item.label }}
-                  </span>
-
-                  @if (item.shortcut) {
-                    <span class="menu-shortcut">
-                      {{ item.shortcut }}
-                    </span>
-                  }
-
-                </button>
-
+        @if (activeMenu() === menu.id) {
+          <div class="menu-bar__dropdown">
+            @switch (menu.id) {
+              @case ('finder') {
+                <button type="button" (click)="openFinder()">Open Finder — All Projects</button>
               }
-
+              @case ('file') {
+                <button type="button" (click)="openResume()">Download Resume…</button>
+              }
+              @case ('edit') {
+                <button type="button" (click)="copyEmail()">
+                  {{ emailCopied() ? 'Copied!' : 'Copy Email Address' }}
+                </button>
+              }
+              @case ('view') {
+                <button type="button" (click)="setTheme('light')">
+                  <span class="menu-bar__check">
+                    @if (theme.theme() === 'light') { <ng-icon name="lucideCheck" size="12" /> }
+                  </span>
+                  Light Mode
+                </button>
+                <button type="button" (click)="setTheme('dark')">
+                  <span class="menu-bar__check">
+                    @if (theme.theme() === 'dark') { <ng-icon name="lucideCheck" size="12" /> }
+                  </span>
+                  Dark Mode
+                </button>
+              }
+              @case ('go') {
+                @for (section of sections; track section.id) {
+                  <button type="button" (click)="goToSection(section.id)">{{ section.label }}</button>
+                }
+              }
+              @case ('window') {
+                <button type="button" (click)="scrollToTop()">Scroll to Top</button>
+                <button type="button" (click)="scrollToBottom()">Scroll to Bottom</button>
+              }
+              @case ('help') {
+                <button type="button" (click)="openAvailability()">Availability…</button>
+                <button type="button" (click)="goToSection('contact')">Get in Touch</button>
+              }
             }
-
           </div>
-
         }
-
       </div>
-
     }
-
   </div>
 
-
-  <!-- RIGHT -->
-  <div class="mac-menu-right">
-
-    <!-- WiFi -->
-    <button
-      class="system-button"
-      aria-label="Wi-Fi"
-      type="button"
-    >
-      <svg viewBox="0 0 24 24">
-        <path d="M2 8.5a16 16 0 0 1 20 0" />
-        <path d="M5.5 12a10.5 10.5 0 0 1 13 0" />
-        <path d="M9 15.5a5 5 0 0 1 6 0" />
-        <circle cx="12" cy="19" r="1" />
-      </svg>
-    </button>
-
-
-    <!-- Search -->
-    <button
-      class="system-button"
-      aria-label="Search"
-      type="button"
-    >
-      <svg viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="6.5" />
-        <path d="m16 16 4 4" />
-      </svg>
-    </button>
-
-
-    <!-- Battery -->
-    <div class="battery">
-      <svg viewBox="0 0 28 16">
-        <rect x="1" y="2" width="23" height="12" rx="3" />
-        <rect x="3.5" y="4.5" width="17" height="7" rx="1.5" />
-        <path d="M26 6v4" />
-      </svg>
-    </div>
-
-
-    <!-- Clock -->
-    <div class="system-time">
-      {{ currentTime() | date:'EEE h:mm a' }}
-    </div>
-
+  <div class="menu-bar__right">
+    <ng-icon name="lucideWifi" size="15" />
+    <ng-icon
+      name="lucideSearch"
+      size="15"
+      (click)="openFinder()"
+      (keydown.enter)="openFinder()"
+      role="button"
+      tabindex="0"
+      aria-label="Search projects"
+    />
+    <ng-icon name="lucideBatteryFull" size="18" />
+    <time class="menu-bar__clock">{{ formattedDate }}</time>
   </div>
-
 </header>

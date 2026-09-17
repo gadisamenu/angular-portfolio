@@ -1,328 +1,153 @@
-import { DatePipe } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  HostListener,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { ionLogoApple } from '@ng-icons/ionicons';
+import { lucideWifi, lucideSearch, lucideBatteryFull, lucideCheck } from '@ng-icons/lucide';
 
-interface MenuItem {
+import { ThemeService } from '../../core/theme.service';
+import { PROFILE, PortfolioStateService } from '../../core/portfolio-state.service';
+
+type MenuId = 'apple' | 'finder' | 'file' | 'edit' | 'view' | 'go' | 'window' | 'help';
+
+interface MenuConfig {
+  id: MenuId;
   label: string;
-  shortcut?: string;
-  separator?: boolean;
-  disabled?: boolean;
-  action?: () => void;
 }
 
-interface Menu {
-  label: string;
-  items: MenuItem[];
-}
+const MENUS: MenuConfig[] = [
+  { id: 'finder', label: 'Finder' },
+  { id: 'file', label: 'File' },
+  { id: 'edit', label: 'Edit' },
+  { id: 'view', label: 'View' },
+  { id: 'go', label: 'Go' },
+  { id: 'window', label: 'Window' },
+  { id: 'help', label: 'Help' },
+];
+
+const CONTACT_EMAIL = PROFILE.email;
+
+const SECTIONS = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Work' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
+];
 
 @Component({
   selector: 'app-menu-bar',
   standalone: true,
+  imports: [NgIcon],
+  providers: [provideIcons({ ionLogoApple, lucideWifi, lucideSearch, lucideBatteryFull, lucideCheck })],
   templateUrl: './menu-bar.html',
   styleUrl: './menu-bar.scss',
-  imports: [DatePipe]
 })
-export class MenuBarComponent {
-  private readonly destroyRef = inject(DestroyRef);
+export class MenuBar implements OnInit, OnDestroy {
+  readonly menus = MENUS;
+  readonly sections = SECTIONS;
+  readonly now = signal(new Date());
+  readonly activeMenu = signal<MenuId | null>(null);
+  readonly emailCopied = signal(false);
+  readonly email = CONTACT_EMAIL;
 
-  readonly activeMenu = signal<string | null>(null);
-  readonly currentTime = signal(new Date());
+  private timer?: ReturnType<typeof setInterval>;
+  private copyTimer?: ReturnType<typeof setTimeout>;
 
-  readonly menus: Menu[] = [
-    {
-      label: 'Finder',
-      items: [
-        {
-          label: 'About This Portfolio',
-          action: () => this.scrollTo('about'),
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Preferences…',
-          disabled: true,
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Hide Finder',
-          shortcut: '⌘H',
-          disabled: true,
-        },
-        {
-          label: 'Hide Others',
-          shortcut: '⌥⌘H',
-          disabled: true,
-        },
-      ],
-    },
+  constructor(
+    private readonly host: ElementRef<HTMLElement>,
+    readonly theme: ThemeService,
+    readonly state: PortfolioStateService,
+  ) {}
 
-    {
-      label: 'File',
-      items: [
-        {
-          label: 'New Project Inquiry',
-          shortcut: '⌘N',
-          action: () => this.scrollTo('contact'),
-        },
-        {
-          label: 'Open Resume',
-          shortcut: '⌘O',
-          action: () => this.openResume(),
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Download Resume',
-          shortcut: '⌘S',
-          action: () => this.downloadResume(),
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Close Window',
-          shortcut: '⌘W',
-          action: () => this.closeWindow(),
-        },
-      ],
-    },
+  ngOnInit(): void {
+    this.timer = setInterval(() => this.now.set(new Date()), 1000 * 30);
+  }
 
-    {
-      label: 'Edit',
-      items: [
-        {
-          label: 'Undo',
-          shortcut: '⌘Z',
-          disabled: true,
-        },
-        {
-          label: 'Redo',
-          shortcut: '⇧⌘Z',
-          disabled: true,
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Copy Email',
-          shortcut: '⌘C',
-          action: () => this.copyEmail(),
-        },
-      ],
-    },
+  ngOnDestroy(): void {
+    if (this.timer) clearInterval(this.timer);
+    if (this.copyTimer) clearTimeout(this.copyTimer);
+  }
 
-    {
-      label: 'View',
-      items: [
-        {
-          label: 'Home',
-          action: () => this.scrollTo('home'),
-        },
-        {
-          label: 'About',
-          action: () => this.scrollTo('about'),
-        },
-        {
-          label: 'Work',
-          action: () => this.scrollTo('work'),
-        },
-        {
-          label: 'Skills',
-          action: () => this.scrollTo('skills'),
-        },
-        {
-          label: 'Experience',
-          action: () => this.scrollTo('experience'),
-        },
-        {
-          label: 'Contact',
-          action: () => this.scrollTo('contact'),
-        },
-      ],
-    },
-
-    {
-      label: 'Go',
-      items: [
-        {
-          label: 'Home',
-          shortcut: '⌘1',
-          action: () => this.scrollTo('home'),
-        },
-        {
-          label: 'About',
-          shortcut: '⌘2',
-          action: () => this.scrollTo('about'),
-        },
-        {
-          label: 'Work',
-          shortcut: '⌘3',
-          action: () => this.scrollTo('work'),
-        },
-        {
-          label: 'Skills',
-          shortcut: '⌘4',
-          action: () => this.scrollTo('skills'),
-        },
-        {
-          label: 'Experience',
-          shortcut: '⌘5',
-          action: () => this.scrollTo('experience'),
-        },
-        {
-          label: 'Contact',
-          shortcut: '⌘6',
-          action: () => this.scrollTo('contact'),
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Availability',
-          action: () => this.openAvailability(),
-        },
-      ],
-    },
-
-    {
-      label: 'Window',
-      items: [
-        {
-          label: 'Projects',
-          action: () => this.openWindow('finder'),
-        },
-        {
-          label: 'Resume',
-          action: () => this.openWindow('resume'),
-        },
-        {
-          label: 'Availability',
-          action: () => this.openWindow('availability'),
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'Close Window',
-          shortcut: '⌘W',
-          action: () => this.closeWindow(),
-        },
-      ],
-    },
-
-    {
-      label: 'Help',
-      items: [
-        {
-          label: 'Portfolio Help',
-          action: () => console.log('Portfolio help'),
-        },
-        {
-          label: 'Keyboard Shortcuts',
-          action: () => console.log('Keyboard shortcuts'),
-        },
-        {
-          separator: true,
-          label: '',
-        },
-        {
-          label: 'About This Website',
-          action: () => console.log('About this website'),
-        },
-      ],
-    },
-  ];
-
-  constructor() {
-    const timer = window.setInterval(() => {
-      this.currentTime.set(new Date());
-    }, 1000);
-
-    this.destroyRef.onDestroy(() => {
-      clearInterval(timer);
+  get formattedDate(): string {
+    return this.now().toLocaleDateString(undefined, {
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
     });
   }
 
-  toggleMenu(event: MouseEvent, menu: string): void {
-    event.stopPropagation();
-
-    this.activeMenu.update((current) =>
-      current === menu ? null : menu
-    );
+  toggleMenu(id: MenuId): void {
+    this.activeMenu.set(this.activeMenu() === id ? null : id);
   }
 
-  execute(event: MouseEvent, item: MenuItem): void {
-    event.stopPropagation();
+  closeMenu(): void {
+    this.activeMenu.set(null);
+  }
 
-    if (item.disabled || item.separator) {
-      return;
+  // Close any open dropdown when clicking outside the menu bar.
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.host.nativeElement.contains(event.target as Node)) {
+      this.closeMenu();
     }
-
-    item.action?.();
-    this.activeMenu.set(null);
-  }
-
-  @HostListener('document:click')
-  closeMenus(): void {
-    this.activeMenu.set(null);
   }
 
   @HostListener('document:keydown.escape')
-  closeEscape(): void {
-    this.activeMenu.set(null);
+  onEscape(): void {
+    this.closeMenu();
   }
 
-  private scrollTo(id: string): void {
-    document
-      .getElementById(id)
-      ?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+  goToSection(id: string): void {
+    this.state.setActiveSection(id);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.closeMenu();
   }
 
-  private openResume(): void {
-    console.log('Open resume');
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.closeMenu();
   }
 
-  private openAvailability(): void {
-    console.log('Open availability');
+  scrollToBottom(): void {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    this.closeMenu();
   }
 
-  private openWindow(window: string): void {
-    console.log('Open window:', window);
+  openAbout(): void {
+    this.goToSection('about');
   }
 
-  private closeWindow(): void {
-    console.log('Close window');
+  openResume(): void {
+    this.state.openWindow('resume');
+    this.closeMenu();
   }
 
-  private copyEmail(): void {
-    navigator.clipboard?.writeText('your@email.com');
+  openFinder(): void {
+    this.state.openWindow('finder');
+    this.closeMenu();
   }
 
-  private downloadResume(): void {
-    const anchor = document.createElement('a');
+  openAvailability(): void {
+    this.state.openWindow('availability');
+    this.closeMenu();
+  }
 
-    anchor.href = '/resume.pdf';
-    anchor.download = 'Gadisa-Amenu-Resume.pdf';
+  setTheme(mode: 'light' | 'dark'): void {
+    this.theme.setTheme(mode);
+    this.closeMenu();
+  }
 
-    anchor.click();
+  async copyEmail(): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+    } catch {
+      /* clipboard API unavailable — dropdown still shows the address to copy manually */
+    }
+    this.emailCopied.set(true);
+    if (this.copyTimer) clearTimeout(this.copyTimer);
+    this.copyTimer = setTimeout(() => {
+      this.emailCopied.set(false);
+      this.closeMenu();
+    }, 1200);
   }
 }

@@ -1,177 +1,161 @@
-/* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ==========================================================================
+   Global styles & design tokens
+   macOS-inspired portfolio — light & dark theme via [data-theme] attribute
+   ========================================================================== */
 
-
-/* ============================================================
-   DESIGN TOKENS
-   ============================================================ */
+@use 'sass:color';
 
 :root {
+  /* ---- Dark theme (default) ---- */
+  --bg-base: #0a0e1a;
+  --bg-elevated: rgba(255, 255, 255, 0.04);
+  --bg-elevated-strong: rgba(255, 255, 255, 0.07);
+  --bg-window: rgba(23, 28, 43, 0.72);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
 
-  /* ---------- Brand ---------- */
+  --text-primary: #f5f6fa;
+  --text-secondary: #9ba3b7;
+  --text-tertiary: #6b7386;
 
-  --color-purple: #8B5CF6;
-  --color-purple-light: #A78BFA;
+  --accent-a: #8b6bf2;
+  --accent-b: #4f8bff;
+  --accent-gradient: linear-gradient(120deg, var(--accent-a), var(--accent-b));
+  --accent-solid: #7c6cf0;
+  --status-green: #34d399;
+  --status-red: #ff5f57;
+  --status-yellow: #febc2e;
 
-  --color-blue: #3B82F6;
-  --color-blue-light: #60A5FA;
+  --shadow-window: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 12px 30px -14px rgba(0, 0, 0, 0.45);
+  --blur-glass: blur(20px);
 
-  --color-cyan: #22D3EE;
-  --color-cyan-light: #67E8F9;
+  /* Hero "scenery" background — theme-aware tokens.
+     These are read by hero.scss via var(); component-scoped stylesheets
+     can't safely target `[data-theme='light']` on <html> because Angular's
+     emulated encapsulation scopes selectors to the component's own DOM, so
+     the theming lives here as inherited custom properties instead. */
+  --hero-glow-1: rgba(255, 170, 130, 0.28);
+  --hero-glow-2: rgba(120, 140, 255, 0.22);
+  --hero-sky-top: #1c2138;
+  --hero-sky-mid: #171b2c;
+  --hero-ridge-fade: rgba(6, 9, 20, 0.55);
+  --hero-ridge-a: rgba(10, 14, 26, 0.55);
+  --hero-ridge-b: rgba(20, 26, 44, 0.5);
 
-  --color-pink: #EC4899;
-  --color-pink-light: #F472B6;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
 
+  /* Combined height of the sticky menu-bar + floating portfolio-nav, so
+     in-page anchor jumps land below both instead of underneath them. */
+  --section-scroll-offset: 112px;
 
-  /* ---------- Gradients ---------- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --gradient-primary:
-    linear-gradient(
-      135deg,
-      #8B5CF6,
-      #3B82F6,
-      #22D3EE
-    );
-
-  --gradient-purple-pink:
-    linear-gradient(
-      135deg,
-      #8B5CF6,
-      #EC4899
-    );
-
-  --gradient-blue-cyan:
-    linear-gradient(
-      135deg,
-      #3B82F6,
-      #22D3EE
-    );
-
-
-  /* ---------- Status ---------- */
-
-  --color-success: #22C55E;
-  --color-success-light: #4ADE80;
-  --color-error: #EF4444;
-  --color-warning: #F59E0B;
-
-
-  /* ---------- macOS controls ---------- */
-
-  --window-close: #FF5F57;
-  --window-minimize: #FEBC2E;
-  --window-maximize: #28C840;
+  color-scheme: dark;
 }
 
+[data-theme='light'] {
+  --bg-base: #eef1f8;
+  --bg-elevated: rgba(255, 255, 255, 0.65);
+  --bg-elevated-strong: rgba(255, 255, 255, 0.85);
+  --bg-window: rgba(255, 255, 255, 0.78);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.14);
 
-/* ============================================================
-   DARK THEME
-   ============================================================ */
+  --text-primary: #161a26;
+  --text-secondary: #545b6e;
+  --text-tertiary: #838a9c;
 
-html[data-theme='dark'] {
+  --shadow-window: 0 30px 60px -24px rgba(30, 41, 82, 0.25);
+  --shadow-card: 0 12px 30px -16px rgba(30, 41, 82, 0.2);
 
-  --color-bg: #050510;
-  --color-bg-secondary: #080B18;
+  --hero-glow-1: rgba(255, 190, 150, 0.35);
+  --hero-glow-2: rgba(140, 170, 255, 0.28);
+  --hero-sky-top: #dfe6fb;
+  --hero-sky-mid: #eef1f8;
+  --hero-ridge-fade: rgba(255, 255, 255, 0.6);
+  --hero-ridge-a: rgba(255, 255, 255, 0.55);
+  --hero-ridge-b: rgba(214, 221, 245, 0.65);
 
-  --color-surface: #0D1224;
-  --color-surface-raised: #12182D;
-  --color-surface-hover: #18203A;
-
-  --color-glass: rgba(15, 23, 42, 0.60);
-  --color-glass-strong: rgba(15, 23, 42, 0.82);
-
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #94A3B8;
-  --color-text-subtle: #64748B;
-
-  --color-border: rgba(255, 255, 255, 0.10);
-  --color-border-strong: rgba(255, 255, 255, 0.16);
-
-  --glow-purple: rgba(139, 92, 246, 0.30);
-  --glow-blue: rgba(59, 130, 246, 0.30);
-  --glow-cyan: rgba(34, 211, 238, 0.25);
-  --glow-pink: rgba(236, 72, 153, 0.25);
-
-
-  /* ---------- Menu ---------- */
-
-  --menu-bg: rgb(5 7 13 / 73%);
-  --menu-border: rgba(255, 255, 255, 0.055);
-
-  --menu-text: rgba(255, 255, 255, 0.94);
-  --menu-text-muted: rgba(255, 255, 255, 0.45);
-
-  --menu-hover: rgba(255, 255, 255, 0.13);
-
-  --menu-dropdown: rgba(25, 27, 32, 0.97);
-  --menu-dropdown-border: rgba(255, 255, 255, 0.13);
-
-  --menu-selected: #3478F6;
+  color-scheme: light;
 }
 
-
-/* ============================================================
-   LIGHT THEME
-   ============================================================ */
-
-html[data-theme='light'] {
-
-  --color-bg: #F5F7FB;
-  --color-bg-secondary: #EEF2F8;
-
-  --color-surface: #FFFFFF;
-  --color-surface-raised: #FFFFFF;
-  --color-surface-hover: #F1F5F9;
-
-  --color-glass: rgba(255, 255, 255, 0.65);
-  --color-glass-strong: rgba(255, 255, 255, 0.85);
-
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #334155;
-  --color-text-muted: #64748B;
-  --color-text-subtle: #94A3B8;
-
-  --color-border: rgba(15, 23, 42, 0.10);
-  --color-border-strong: rgba(15, 23, 42, 0.16);
-
-  --glow-purple: rgba(139, 92, 246, 0.15);
-  --glow-blue: rgba(59, 130, 246, 0.15);
-  --glow-cyan: rgba(34, 211, 238, 0.12);
-  --glow-pink: rgba(236, 72, 153, 0.12);
-
-
-  /* ---------- Menu ---------- */
-
-  --menu-bg: rgba(248, 250, 252, 0.82);
-  --menu-border: rgba(15, 23, 42, 0.08);
-
-  --menu-text: rgba(15, 23, 42, 0.90);
-  --menu-text-muted: rgba(15, 23, 42, 0.45);
-
-  --menu-hover: rgba(15, 23, 42, 0.08);
-
-  --menu-dropdown: rgba(248, 250, 252, 0.96);
-  --menu-dropdown-border: rgba(15, 23, 42, 0.12);
-
-  --menu-selected: #3478F6;
+* {
+  box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 body {
-    margin: 0
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-@keyframes menuIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.98);
+h1, h2, h3, h4, p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent-solid);
+  color: #fff;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Visible keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--accent-b);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.glass-panel {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+
+  span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  .red { background: var(--status-red); }
+  .yellow { background: var(--status-yellow); }
+  .green { background: var(--status-green); }
 }

@@ -998,6 +998,27 @@
   dependencies:
     "@tybys/wasm-util" "^0.10.3"
 
+"@ng-icons/core@^36.0.0":
+  version "36.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/core/-/core-36.0.0.tgz#b455e76853f29ce7f53c2299995e2ed6df348d81"
+  integrity sha512-u4BxD2MTeZNbugAHQcUrG2lhOFDmfbiZwqvxA2uABHrYQmTG1xjnTe7kivJJ/Cl2MfTy8U8aIL3u0eryaPavCA==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ng-icons/ionicons@^36.0.0":
+  version "36.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/ionicons/-/ionicons-36.0.0.tgz#78f1d4ed3c831010c3d221a6294e34e39deb35fa"
+  integrity sha512-OfN5sYkZtyCCkXnWVmhCHNUL6n17SKwVlUrimD4+1HgJ4DciFQPhEoRr1NV9RFRKpa45bzx6SBLAR/5AnESFXg==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ng-icons/lucide@^36.0.0":
+  version "36.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/lucide/-/lucide-36.0.0.tgz#65169cb66509420773a2063894fdabb6c1f78c6c"
+  integrity sha512-fxZ8nOyUAhD3Ty6IM02h3kgVfCQ09NbyJkoS2BiaPd1BnU3oCX90RfbmJYkOBSJc/1gl0IkA7CTR0Xmi/g0zvg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@oxc-parser/binding-android-arm-eabi@0.142.0":
   version "0.142.0"
   resolved "https://registry.yarnpkg.com/@oxc-parser/binding-android-arm-eabi/-/binding-android-arm-eabi-0.142.0.tgz#12951a56ed573c0246ceacbc94e29d7e90d3925a"
