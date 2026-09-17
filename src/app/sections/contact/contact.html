@@ -1,0 +1,93 @@
+<section id="contact" class="contact glass-panel">
+  <div class="contact__intro">
+    <div class="contact__heading">
+      <h2>Let's work together</h2>
+      <span class="contact__dot" aria-hidden="true"></span>
+    </div>
+    <p>Have a product or role in mind? I would love to help you ship it.</p>
+
+    <a class="contact__email" [href]="'mailto:' + email">
+      <ng-icon name="lucideMail" size="14" />
+      {{ email }}
+    </a>
+    <a class="contact__email" [href]="profile.phoneHref">
+      <ng-icon name="lucidePhone" size="14" />
+      {{ profile.phone }}
+    </a>
+
+    <div class="contact__social">
+      <a [href]="profile.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <ng-icon name="ionLogoGithub" size="16" />
+      </a>
+      <a [href]="profile.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <ng-icon name="ionLogoLinkedin" size="16" />
+      </a>
+      <a [href]="profile.leetcode" target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+        <ng-icon name="lucideBinary" size="16" />
+      </a>
+    </div>
+  </div>
+
+  <div class="contact__form-wrap">
+    @if (!submitted()) {
+      <form class="contact__form" (submit)="onSubmit($event)" novalidate>
+        <div class="contact__row">
+          <label class="contact__field">
+            <span>Name</span>
+            <input
+              type="text"
+              name="name"
+              required
+              [ngModel]="form().name"
+              (ngModelChange)="updateField('name', $event)"
+              placeholder="Your name"
+              autocomplete="name"
+            />
+          </label>
+
+          <label class="contact__field">
+            <span>Email</span>
+            <input
+              type="email"
+              name="email"
+              required
+              [ngModel]="form().email"
+              (ngModelChange)="updateField('email', $event)"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+          </label>
+        </div>
+
+        <label class="contact__field">
+          <span>Message</span>
+          <textarea
+            name="message"
+            rows="4"
+            required
+            [ngModel]="form().message"
+            (ngModelChange)="updateField('message', $event)"
+            placeholder="Tell me about your project…"
+          ></textarea>
+        </label>
+
+        <button type="submit" class="contact__submit">
+          Send message
+          <ng-icon name="lucideSend" size="15" />
+        </button>
+      </form>
+    } @else {
+      <div class="contact__success">
+        <span class="contact__success-icon">
+          <ng-icon name="lucideCheck" size="18" />
+        </span>
+        <p class="contact__success-title">Your email app should be open</p>
+        <p class="contact__success-desc">
+          I've pre-filled a message for you. Nothing popped up? Email me
+          directly at <a [href]="'mailto:' + email">{{ email }}</a>.
+        </p>
+        <button type="button" class="contact__reset" (click)="resetForm()">Send another</button>
+      </div>
+    }
+  </div>
+</section>

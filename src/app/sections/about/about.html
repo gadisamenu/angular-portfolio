@@ -1,0 +1,27 @@
+<section id="about" class="about glass-panel">
+  <header class="about__header">
+    <ng-icon name="lucideUser" size="16" />
+    <h2>About me</h2>
+  </header>
+
+  <div class="about__body">
+    <div class="about__intro">
+      <h3>{{ state.profile.aboutHeading }}</h3>
+      <p>{{ state.profile.aboutBody }}</p>
+    </div>
+
+    <div class="about__stats">
+      @for (stat of state.stats; track stat.id) {
+        <div class="about__stat">
+          <span class="about__stat-icon">
+            <ng-icon [name]="stat.icon" size="16" />
+          </span>
+          <div>
+            <p class="about__stat-label">{{ stat.label }}</p>
+            <p class="about__stat-value">{{ stat.value }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<nav class="portfolio-nav glass-panel">
+  <div class="portfolio-nav__brand">
+    <span>Gadisa Amenu</span>
+    <span class="portfolio-nav__dot" aria-hidden="true"></span>
+  </div>
+
+  <ul class="portfolio-nav__links">
+    @for (link of links; track link.id) {
+      <li>
+        <button
+          type="button"
+          class="portfolio-nav__link"
+          [class.portfolio-nav__link--active]="state.activeSection() === link.id"
+          (click)="navigate(link.id)"
+        >
+          {{ link.label }}
+        </button>
+      </li>
+    }
+  </ul>
+
+  <div class="portfolio-nav__actions">
+    <button
+      type="button"
+      class="portfolio-nav__theme-toggle"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      <ng-icon [name]="theme.theme() === 'dark' ? 'lucideMoon' : 'lucideSun'" size="15" />
+    </button>
+
+    <button type="button" class="portfolio-nav__cta" (click)="openContact()">
+      Get in touch
+    </button>
+  </div>
+</nav>

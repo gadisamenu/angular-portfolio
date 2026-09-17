@@ -1,0 +1,17 @@
+<section id="skills" class="skills glass-panel">
+  <header class="skills__header">
+    <ng-icon name="lucideCode" size="16" />
+    <h2>Skills</h2>
+  </header>
+
+  <div class="skills__grid">
+    @for (skill of state.skills; track skill.id) {
+      <div class="skill-tile">
+        <span class="skill-tile__icon" [style.color]="skill.color">
+          <ng-icon [name]="skill.icon" size="20" />
+        </span>
+        <p>{{ skill.name }}</p>
+      </div>
+    }
+  </div>
+</section>
