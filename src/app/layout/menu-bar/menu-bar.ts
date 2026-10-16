@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { ionLogoApple } from '@ng-icons/ionicons';
 import { lucideWifi, lucideSearch, lucideBatteryFull, lucideCheck } from '@ng-icons/lucide';
 
 import { ThemeService } from '../../core/theme.service';
@@ -38,7 +37,7 @@ const SECTIONS = [
   selector: 'app-menu-bar',
   standalone: true,
   imports: [NgIcon],
-  providers: [provideIcons({ ionLogoApple, lucideWifi, lucideSearch, lucideBatteryFull, lucideCheck })],
+  providers: [provideIcons({ lucideWifi, lucideSearch, lucideBatteryFull, lucideCheck })],
   templateUrl: './menu-bar.html',
   styleUrl: './menu-bar.scss',
 })

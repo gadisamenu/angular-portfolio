@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 320" role="img" aria-labelledby="title desc">
+  <title id="title">GA portfolio mark</title>
+  <desc id="desc">A geometric GA monogram with coding brackets, pixel accents, and an orbital sweep.</desc>
+  <style>
+    :root {
+      --ga-primary: #1D4ED8;
+      --ga-accent: #0891B2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ga-primary: #60A5FA;
+        --ga-accent: #22D3EE;
+      }
+    }
+    .primary { fill: var(--ga-primary); }
+    .accent { fill: var(--ga-accent); }
+    .line-primary { stroke: var(--ga-primary); }
+    .line-accent { stroke: var(--ga-accent); }
+  </style>
+
+  <!-- G: open geometric ring -->
+  <path class="primary" fill-rule="evenodd" d="
+    M 215 63
+    C 196 43, 168 32, 138 32
+    C 79 32, 34 77, 34 136
+    C 34 195, 78 239, 136 239
+    C 180 239, 214 217, 235 181
+    L 204 163
+    C 189 190, 166 204, 138 204
+    C 99 204, 69 174, 69 136
+    C 69 97, 99 67, 138 67
+    C 160 67, 178 75, 192 90
+    Z"/>
+  <path class="primary" d="M 128 121 H 229 C 236 121 240 129 235 135 L 169 218 H 126 L 178 156 H 101 Z"/>
+
+  <!-- A: angular, simplified letterform -->
+  <path class="accent" d="M 256 32 L 366 231 H 326 L 256 102 L 225 158 H 185 Z"/>
+  <path class="accent" d="M 271 146 L 319 231 H 279 L 250 179 Z"/>
+
+  <!-- Small pixel accents -->
+  <rect class="accent" x="374" y="64" width="20" height="20" rx="3"/>
+  <rect class="primary" x="354" y="87" width="20" height="20" rx="3"/>
+  <rect class="accent" x="334" y="110" width="20" height="20" rx="3"/>
+  <rect class="primary" x="354" y="133" width="16" height="16" rx="3"/>
+
+  <!-- Code motif -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
+    <path class="line-accent" d="M 190 177 L 174 193 L 190 209"/>
+    <path class="line-accent" d="M 226 177 L 242 193 L 226 209"/>
+    <path class="line-primary" d="M 215 171 L 202 215"/>
+  </g>
+
+  <!-- Orbit/sweep -->
+  <path d="M 40 237 C 91 286, 255 284, 373 220 C 399 206, 411 190, 407 177"
+        fill="none" class="line-accent" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 392 177 L 407 177 L 402 192" fill="none" class="line-accent"
+        stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

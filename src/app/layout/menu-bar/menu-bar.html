@@ -6,9 +6,9 @@
         class="menu-bar__apple"
         (click)="toggleMenu('apple')"
         [class.menu-bar__item--active]="activeMenu() === 'apple'"
-        aria-label="Apple menu"
+        aria-label="Portfolio menu"
       >
-        <ng-icon name="ionLogoApple" size="16" />
+        <img class="menu-bar__logo" src="/images/ga-portfolio-logo.svg" alt="" />
       </button>
 
       @if (activeMenu() === 'apple') {
