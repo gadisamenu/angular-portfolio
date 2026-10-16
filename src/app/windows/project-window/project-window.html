@@ -21,7 +21,23 @@
         </button>
       </div>
 
-      <div class="project-window__preview" [attr.data-variant]="project.image"></div>
+      @if (project.images?.length) {
+        <img class="project-window__image" [src]="project.images[imageIndex(project)]"
+          [alt]="project.title + ' screenshot ' + (imageIndex(project) + 1)" />
+        @if (project.images.length > 1) {
+          <button type="button" class="project-window__image-arrow project-window__image-arrow--prev"
+                  (click)="changeImage(project, -1)"
+                  [attr.aria-label]="'Previous image for ' + project.title">
+            <ng-icon name="lucideChevronLeft" size="18" />
+          </button>
+          <button type="button" class="project-window__image-arrow project-window__image-arrow--next"
+                  (click)="changeImage(project, 1)"
+                  [attr.aria-label]="'Next image for ' + project.title">
+            <ng-icon name="lucideChevronRight" size="18" />
+          </button>
+          <span class="project-window__image-count">{{ imageIndex(project) + 1 }} / {{ project.images.length }}</span>
+        }
+      }
 
       <div class="project-window__body">
         <div class="project-window__tags">

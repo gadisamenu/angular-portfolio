@@ -19,29 +19,8 @@
       @for (project of visibleProjects(); track project.id) {
         <article class="project-card" (click)="openProject(project)" tabindex="0"
                  (keydown.enter)="openProject(project)">
-          <div class="project-card__preview" [attr.data-variant]="project.image">
-            @switch (project.image) {
-              @case ('analytics') {
-                <div class="mock mock--analytics">
-                  <div class="mock__bars">
-                    <span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-              }
-              @case ('ecommerce') {
-                <div class="mock mock--ecommerce">
-                  <p>Parts catalogs<br />that scale</p>
-                </div>
-              }
-              @case ('travel') {
-                <div class="mock mock--travel">
-                  <p>Care for<br />mothers</p>
-                </div>
-              }
-              @default {
-                <div class="mock mock--generic"></div>
-              }
-            }
+          <div class="project-card__preview" [attr.data-variant]="project.images?.[0]">
+            <img class="project-card__image" [src]="project.images?.[0]" [alt]="project.title + ' screenshot'" />
           </div>
 
           <div class="project-card__body">

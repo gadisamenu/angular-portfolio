@@ -41,7 +41,7 @@
         <div class="finder-window__grid">
           @for (project of state.projects; track project.id) {
             <button type="button" class="finder-file" (click)="select(project)">
-              <span class="finder-file__thumb" [attr.data-variant]="project.image"></span>
+              <img class="finder-file__image" [src]="project.images?.[0]" [alt]="project.title + ' screenshot'" />
               <span class="finder-file__name">{{ project.title }}</span>
               <span class="finder-file__meta">{{ project.tags.join(', ') }}</span>
             </button>

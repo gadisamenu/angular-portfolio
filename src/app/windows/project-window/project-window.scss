@@ -70,13 +70,47 @@
 
   &__preview {
     aspect-ratio: 16 / 8;
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(160deg, var(--bg-elevated-strong), var(--bg-elevated));
+  }
 
-    &[data-variant='analytics'] { background: linear-gradient(160deg, #eef1fb, #c9d0ec); }
-    &[data-variant='ecommerce'] { background: linear-gradient(160deg, #2a2015, #16181f); }
-    &[data-variant='travel'] { background: linear-gradient(160deg, #517094, #23324a); }
-    &[data-variant='tasks'] { background: linear-gradient(160deg, #3a4c72, #20293f); }
-    &[data-variant='fitness'] { background: linear-gradient(160deg, #2f6b4a, #1f2d24); }
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__image-arrow {
+    position: absolute;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    background: rgba(16, 19, 25, 0.72);
+    color: #fff;
+    cursor: pointer;
+
+    &--prev { left: 14px; }
+    &--next { right: 14px; }
+  }
+
+  &__image-count {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    padding: 5px 9px;
+    border-radius: var(--radius-pill);
+    background: rgba(16, 19, 25, 0.72);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
   }
 
   &__body {

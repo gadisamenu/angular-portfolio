@@ -8,7 +8,7 @@ export interface Project {
   description: string;
   longDescription: string;
   tags: string[];
-  image: string;
+  images?: string[];
   accentFrom: string;
   accentTo: string;
   liveUrl?: string;
@@ -66,7 +66,7 @@ export const PROFILE = {
     'Full stack developer and Software Engineering graduate specializing in AI from Addis Ababa Institute of Technology.',
   aboutHeading: 'I turn complex problems into working products.',
   aboutBody:
-    'I am passionate about competitive programming, software development, and data science, with a strong interest in applying AI to real products. When I am not coding, I am usually watching football, cycling, or catching a movie.',
+    'I am passionate about competitive programming, software development, and data science, with a strong interest in applying AI to real products. When I am not coding, I am usually cycling, playing football, or catching a movie.',
   availability:
     'Open to full-time roles and freelance projects. Happy to collaborate across time zones.',
 };
@@ -79,7 +79,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       'At Solid Lift Parts I worked on a multi-store eCommerce platform used by thousands of people each day. The work covered migrating stores, building React storefront components, implementing Express APIs, running large data migrations, and launching new sites.',
     tags: ['React', 'Express', 'MariaDB', 'Elasticsearch'],
-    image: 'ecommerce',
+    images: ['/images/projects/solid-lift.svg', '/images/projects/solid-lift.svg'],
     accentFrom: '#1a1a1a',
     accentTo: '#3a2b1a',
   },
@@ -90,7 +90,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       'At Africa to Silicon Valley I was a backend engineer on Adot, a product focused on supporting mothers during pregnancy. I implemented API endpoints, improved test performance, wrote comprehensive tests, and built a notification system with Pub/Sub, Cloud Tasks, and Firebase, then deployed on GCP Cloud Run.',
     tags: ['Express', 'MongoDB', 'GCP', 'Firebase'],
-    image: 'travel',
+    images: ['/images/projects/adot.svg'],
     accentFrom: '#2b3a55',
     accentTo: '#4d6a8f',
   },
@@ -101,7 +101,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       'ORIDMS automates state administrative work — planning, statistics, document management, and letters — across a hierarchical government structure. I built REST APIs, handled data aggregations, and implemented Angular pages from wireframes with state management on ASP.NET Core and PostgreSQL.',
     tags: ['ASP.NET', 'Angular', 'PostgreSQL'],
-    image: 'analytics',
+    images: ['/images/projects/oridms.svg', '/images/projects/oridms.svg'],
     accentFrom: '#e9ecf6',
     accentTo: '#c9d0ec',
   },
@@ -112,7 +112,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       'Graduation project: a blockchain marketplace where users monetize digital assets through several selling methods, with NFTs used to guarantee authenticity. Backend in ASP.NET Core with React (Next.js) on the frontend, plus PostgreSQL, RabbitMQ, and blockchain integrations.',
     tags: ['Next.js', 'ASP.NET', 'PostgreSQL', 'RabbitMQ'],
-    image: 'tasks',
+    images: ['/images/projects/nft-marketplace.svg'],
     accentFrom: '#20293f',
     accentTo: '#3a4c72',
   },
@@ -123,7 +123,7 @@ export const PROJECTS: Project[] = [
     longDescription:
       'Rate Eat lets people give and read item-specific reviews, and shows businesses where they can improve. Built during an A2SV internship with Express, MongoDB, React, and Flutter.',
     tags: ['Express', 'MongoDB', 'React', 'Flutter'],
-    image: 'fitness',
+    images: ['/images/projects/rate-eat.svg', '/images/projects/rate-eat.svg'],
     accentFrom: '#1f2d24',
     accentTo: '#2f6b4a',
   },
@@ -203,9 +203,9 @@ export const EDUCATION: EducationItem[] = [
 ];
 
 export const STATS: StatItem[] = [
-  { id: 'experience', icon: 'lucideBriefcase', label: 'Experience', value: '3+ Years' },
+  { id: 'experience', icon: 'lucideBriefcase', label: 'Experience', value: '5+ Years' },
   { id: 'education', icon: 'lucideGraduationCap', label: 'Education', value: 'BSc · 3.73 GPA' },
-  { id: 'algorithms', icon: 'lucideBinary', label: 'Algorithms', value: '800+ solved' },
+  { id: 'algorithms', icon: 'lucideBinary', label: 'Competitive Programming', value: '800+ solved' },
   { id: 'availability', icon: 'lucideCircleDot', label: 'Availability', value: 'Open for work' },
 ];
 

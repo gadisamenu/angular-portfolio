@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" role="img" aria-labelledby="title">
+  <title id="title">Solid Lift parts storefront</title>
+  <rect width="1400" height="700" fill="#f2f1ed"/>
+  <rect width="1400" height="58" fill="#202821"/>
+  <text x="56" y="37" fill="#fff" font-family="Arial,sans-serif" font-size="22" font-weight="700">SOLID LIFT</text>
+  <text x="280" y="36" fill="#d4ddd5" font-family="Arial,sans-serif" font-size="14">Shop by category</text>
+  <text x="452" y="36" fill="#d4ddd5" font-family="Arial,sans-serif" font-size="14">Brands</text>
+  <rect x="1018" y="13" width="245" height="32" rx="5" fill="#fff"/>
+  <text x="1034" y="34" fill="#777d76" font-family="Arial,sans-serif" font-size="13">Search parts and equipment</text>
+  <rect x="50" y="88" width="1300" height="184" rx="8" fill="#dce5dc"/>
+  <text x="90" y="144" fill="#25342a" font-family="Arial,sans-serif" font-size="14" font-weight="700">BUILT FOR THE WORK</text>
+  <text x="90" y="191" fill="#1c2820" font-family="Arial,sans-serif" font-size="34" font-weight="700">Parts, ready for the job.</text>
+  <text x="90" y="225" fill="#536359" font-family="Arial,sans-serif" font-size="15">Find the right part across trusted equipment brands.</text>
+  <rect x="1040" y="112" width="214" height="134" rx="8" fill="#34483a"/>
+  <path d="M1072 215h150l-18-62h-114z" fill="#879a85"/>
+  <circle cx="1101" cy="220" r="18" fill="#26332a"/><circle cx="1193" cy="220" r="18" fill="#26332a"/>
+  <text x="54" y="319" fill="#28342b" font-family="Arial,sans-serif" font-size="20" font-weight="700">Popular categories</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="50" y="342" width="305" height="284" rx="7" fill="#fff" stroke="#e2e2dc"/><rect x="50" y="342" width="305" height="160" rx="7" fill="#e7e9e4"/>
+    <rect x="78" y="383" width="246" height="88" rx="5" fill="#b5c1b2"/><path d="M98 456h206l-20-47H119z" fill="#607262"/>
+    <text x="72" y="540" fill="#26332a" font-size="16" font-weight="700">Engine components</text><text x="72" y="567" fill="#737a73" font-size="13">Browse 1,240 parts</text>
+    <rect x="383" y="342" width="305" height="284" rx="7" fill="#fff" stroke="#e2e2dc"/><rect x="383" y="342" width="305" height="160" rx="7" fill="#ece8df"/>
+    <rect x="447" y="376" width="180" height="104" rx="5" fill="#c6b99f"/><circle cx="537" cy="428" r="36" fill="#7e7769"/><circle cx="537" cy="428" r="19" fill="#d6cbb7"/>
+    <text x="405" y="540" fill="#26332a" font-size="16" font-weight="700">Hydraulic systems</text><text x="405" y="567" fill="#737a73" font-size="13">Browse 860 parts</text>
+    <rect x="716" y="342" width="305" height="284" rx="7" fill="#fff" stroke="#e2e2dc"/><rect x="716" y="342" width="305" height="160" rx="7" fill="#e3e9e8"/>
+    <rect x="773" y="386" width="190" height="76" rx="8" fill="#7c9292"/><circle cx="805" cy="465" r="18" fill="#455657"/><circle cx="926" cy="465" r="18" fill="#455657"/>
+    <text x="738" y="540" fill="#26332a" font-size="16" font-weight="700">Electrical parts</text><text x="738" y="567" fill="#737a73" font-size="13">Browse 520 parts</text>
+    <rect x="1049" y="342" width="301" height="284" rx="7" fill="#fff" stroke="#e2e2dc"/><rect x="1049" y="342" width="301" height="160" rx="7" fill="#ede5dc"/>
+    <rect x="1108" y="376" width="184" height="106" rx="5" fill="#bd9d7d"/><path d="M1127 464h146l-19-53h-107z" fill="#80654e"/>
+    <text x="1071" y="540" fill="#26332a" font-size="16" font-weight="700">Cab and body</text><text x="1071" y="567" fill="#737a73" font-size="13">Browse 390 parts</text>
+  </g>
+</svg>

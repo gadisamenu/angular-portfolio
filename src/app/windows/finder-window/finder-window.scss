@@ -147,17 +147,11 @@
     border-color: var(--border-subtle);
   }
 
-  &__thumb {
+  &__image {
     width: 100%;
     aspect-ratio: 1;
     border-radius: 8px;
-    background: linear-gradient(160deg, var(--bg-elevated-strong), var(--bg-elevated));
-
-    &[data-variant='analytics'] { background: linear-gradient(160deg, #eef1fb, #c9d0ec); }
-    &[data-variant='ecommerce'] { background: linear-gradient(160deg, #2a2015, #16181f); }
-    &[data-variant='travel'] { background: linear-gradient(160deg, #517094, #23324a); }
-    &[data-variant='tasks'] { background: linear-gradient(160deg, #3a4c72, #20293f); }
-    &[data-variant='fitness'] { background: linear-gradient(160deg, #2f6b4a, #1f2d24); }
+    object-fit:cover;
   }
 
   &__name {

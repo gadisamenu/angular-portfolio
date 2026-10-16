@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" role="img" aria-labelledby="title">
+  <title id="title">ORIDMS administration dashboard</title>
+  <rect width="1400" height="700" fill="#f4f6f9"/>
+  <rect width="244" height="700" fill="#202d48"/>
+  <text x="35" y="56" fill="#fff" font-family="Arial,sans-serif" font-size="24" font-weight="700">ORIDMS</text>
+  <text x="35" y="82" fill="#aebbd0" font-family="Arial,sans-serif" font-size="11">REGIONAL ADMINISTRATION</text>
+  <g font-family="Arial,sans-serif" font-size="14">
+    <rect x="18" y="119" width="208" height="41" rx="5" fill="#344665"/><text x="52" y="145" fill="#fff">Overview</text>
+    <text x="52" y="202" fill="#b9c5d7">Planning</text><text x="52" y="250" fill="#b9c5d7">Statistics</text>
+    <text x="52" y="298" fill="#b9c5d7">Documents</text><text x="52" y="346" fill="#b9c5d7">Letters</text><text x="52" y="394" fill="#b9c5d7">Organizations</text>
+  </g>
+  <circle cx="34" cy="141" r="4" fill="#75a5dc"/>
+  <text x="283" y="55" fill="#2c3b55" font-family="Arial,sans-serif" font-size="13">ADMINISTRATION / OVERVIEW</text>
+  <text x="283" y="96" fill="#202f49" font-family="Arial,sans-serif" font-size="28" font-weight="700">Regional overview</text>
+  <rect x="1135" y="48" width="220" height="38" rx="5" fill="#fff" stroke="#dce2eb"/><text x="1156" y="72" fill="#586881" font-family="Arial,sans-serif" font-size="13">This quarter  v</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="283" y="122" width="248" height="115" rx="7" fill="#fff" stroke="#dfe4eb"/><text x="305" y="153" fill="#748198" font-size="13">Active plans</text><text x="305" y="196" fill="#253955" font-size="30" font-weight="700">1,284</text><text x="432" y="195" fill="#3b8a73" font-size="12">+8.4%</text>
+    <rect x="551" y="122" width="248" height="115" rx="7" fill="#fff" stroke="#dfe4eb"/><text x="573" y="153" fill="#748198" font-size="13">Documents</text><text x="573" y="196" fill="#253955" font-size="30" font-weight="700">6,492</text><text x="700" y="195" fill="#3b8a73" font-size="12">+12.1%</text>
+    <rect x="819" y="122" width="248" height="115" rx="7" fill="#fff" stroke="#dfe4eb"/><text x="841" y="153" fill="#748198" font-size="13">Departments</text><text x="841" y="196" fill="#253955" font-size="30" font-weight="700">38</text><text x="913" y="195" fill="#748198" font-size="12">Across region</text>
+    <rect x="1087" y="122" width="268" height="115" rx="7" fill="#fff" stroke="#dfe4eb"/><text x="1109" y="153" fill="#748198" font-size="13">Pending reviews</text><text x="1109" y="196" fill="#253955" font-size="30" font-weight="700">27</text><text x="1170" y="195" fill="#cb794e" font-size="12">Needs attention</text>
+  </g>
+  <rect x="283" y="258" width="670" height="242" rx="7" fill="#fff" stroke="#dfe4eb"/>
+  <text x="307" y="291" fill="#2b3b55" font-family="Arial,sans-serif" font-size="16" font-weight="700">Plan completion</text><text x="307" y="316" fill="#8a95a8" font-family="Arial,sans-serif" font-size="12">Department progress over the last 6 months</text>
+  <g stroke="#e8ecf2" stroke-width="1"><path d="M328 355h578M328 390h578M328 425h578M328 460h578"/></g>
+  <g fill="#7fa1cf"><rect x="354" y="417" width="39" height="43" rx="3"/><rect x="438" y="390" width="39" height="70" rx="3"/><rect x="522" y="400" width="39" height="60" rx="3"/><rect x="606" y="369" width="39" height="91" rx="3"/><rect x="690" y="380" width="39" height="80" rx="3"/><rect x="774" y="343" width="39" height="117" rx="3"/><rect x="858" y="354" width="39" height="106" rx="3"/></g>
+  <g fill="#8490a3" font-family="Arial,sans-serif" font-size="11"><text x="356" y="482">Nov</text><text x="440" y="482">Dec</text><text x="524" y="482">Jan</text><text x="608" y="482">Feb</text><text x="692" y="482">Mar</text><text x="776" y="482">Apr</text><text x="860" y="482">May</text></g>
+  <rect x="973" y="258" width="382" height="242" rx="7" fill="#fff" stroke="#dfe4eb"/><text x="997" y="291" fill="#2b3b55" font-family="Arial,sans-serif" font-size="16" font-weight="700">Recent activity</text>
+  <g font-family="Arial,sans-serif"><circle cx="1014" cy="338" r="15" fill="#e2edf8"/><text x="1040" y="334" fill="#40516b" font-size="13" font-weight="700">Annual plan submitted</text><text x="1040" y="353" fill="#8a95a8" font-size="11">Planning Office  -  12 min ago</text><path d="M997 374h334" stroke="#edf0f4"/>
+    <circle cx="1014" cy="407" r="15" fill="#e8eee6"/><text x="1040" y="403" fill="#40516b" font-size="13" font-weight="700">Statistics report approved</text><text x="1040" y="422" fill="#8a95a8" font-size="11">Data Bureau  -  46 min ago</text><path d="M997 444h334" stroke="#edf0f4"/>
+    <circle cx="1014" cy="473" r="15" fill="#f6ebe1"/><text x="1040" y="469" fill="#40516b" font-size="13" font-weight="700">Letter awaiting signature</text><text x="1040" y="488" fill="#8a95a8" font-size="11">Executive Office  -  1 hr ago</text></g>
+  <rect x="283" y="521" width="1072" height="142" rx="7" fill="#fff" stroke="#dfe4eb"/>
+  <text x="307" y="553" fill="#2b3b55" font-family="Arial,sans-serif" font-size="16" font-weight="700">Department status</text>
+  <g font-family="Arial,sans-serif" font-size="12"><text x="307" y="589" fill="#8a95a8">DEPARTMENT</text><text x="772" y="589" fill="#8a95a8">OWNER</text><text x="1000" y="589" fill="#8a95a8">STATUS</text><path d="M307 601h1023M307 630h1023" stroke="#edf0f4"/><text x="307" y="621" fill="#40516b">Infrastructure and Works</text><text x="772" y="621" fill="#64738a">Planning Office</text><rect x="995" y="607" width="94" height="21" rx="10" fill="#e6f3ed"/><text x="1012" y="622" fill="#35755c">On track</text></g>
+</svg>
