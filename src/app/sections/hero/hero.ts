@@ -1,6 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight, lucideMail, lucideBinary } from '@ng-icons/lucide';
+import {
+  lucideArrowRight,
+  lucideMail,
+  lucideBinary,
+  lucideCopy,
+  lucideCheck,
+  lucideFileText,
+  lucideSparkles,
+  lucideMapPin,
+  lucideGraduationCap,
+} from '@ng-icons/lucide';
 import { ionLogoGithub, ionLogoLinkedin } from '@ng-icons/ionicons';
 
 import { PortfolioStateService } from '../../core/portfolio-state.service';
@@ -10,16 +20,31 @@ import { PortfolioStateService } from '../../core/portfolio-state.service';
   standalone: true,
   imports: [NgIcon],
   providers: [
-    provideIcons({ lucideArrowRight, lucideMail, lucideBinary, ionLogoGithub, ionLogoLinkedin }),
+    provideIcons({
+      lucideArrowRight,
+      lucideMail,
+      lucideBinary,
+      lucideCopy,
+      lucideCheck,
+      lucideFileText,
+      lucideSparkles,
+      lucideMapPin,
+      lucideGraduationCap,
+      ionLogoGithub,
+      ionLogoLinkedin,
+    }),
   ],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
 export class Hero {
+  readonly emailCopied = signal(false);
+
   constructor(readonly state: PortfolioStateService) {}
 
-  viewWork(): void {
-    this.state.openWindow('finder');
+  scrollToWork(): void {
+    document.getElementById('work')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.state.setActiveSection('work');
   }
 
   downloadResume(): void {
@@ -32,5 +57,11 @@ export class Hero {
 
   openPhoto(): void {
     this.state.openWindow('preview');
+  }
+
+  copyEmail(): void {
+    navigator.clipboard.writeText(this.state.profile.email);
+    this.emailCopied.set(true);
+    setTimeout(() => this.emailCopied.set(false), 2400);
   }
 }

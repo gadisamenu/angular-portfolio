@@ -1,8 +1,9 @@
 <nav class="portfolio-nav glass-panel">
-  <div class="portfolio-nav__brand">
+  <button type="button" class="portfolio-nav__brand" (click)="scrollToTop()" aria-label="Scroll to top">
     <span>Gadisa Amenu</span>
     <span class="portfolio-nav__dot" aria-hidden="true"></span>
-  </div>
+    <span class="portfolio-nav__status-text">Available</span>
+  </button>
 
   <ul class="portfolio-nav__links">
     @for (link of links; track link.id) {

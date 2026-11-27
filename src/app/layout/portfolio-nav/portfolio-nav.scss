@@ -11,12 +11,23 @@
   box-shadow: var(--shadow-card);
 
   &__brand {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
     font-weight: 600;
     font-size: 14px;
+    color: var(--text-primary);
     white-space: nowrap;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
   }
 
   &__dot {
@@ -24,7 +35,23 @@
     height: 7px;
     border-radius: 50%;
     background: var(--status-green);
-    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.18);
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+    animation: beacon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &__status-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--status-green);
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+
+    @media (max-width: 540px) {
+      display: none;
+    }
   }
 
   &__links {
@@ -57,6 +84,7 @@
     &--active {
       color: var(--text-primary);
       background: var(--bg-elevated-strong);
+      font-weight: 600;
     }
   }
 
@@ -73,41 +101,50 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 1px solid var(--border-subtle);
     background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
     color: var(--text-primary);
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.2s ease;
 
     &:hover {
       background: var(--bg-elevated-strong);
     }
-    &:active {
-      transform: scale(0.94);
-    }
   }
 
   &__cta {
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
     border-radius: var(--radius-pill);
-    padding: 9px 18px;
-    background: var(--text-primary);
-    color: var(--bg-base);
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
+    background: var(--accent-gradient);
+    color: #fff;
+    border: none;
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.15s ease;
-    white-space: nowrap;
+    transition: filter 0.2s ease;
 
     &:hover {
-      opacity: 0.88;
-    }
-    &:active {
-      transform: scale(0.97);
+      filter: brightness(1.1);
     }
 
     @media (max-width: 480px) {
       display: none;
     }
+  }
+}
+
+@keyframes beacon-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(0.95);
+    box-shadow: 0 0 0 6px rgba(52, 211, 153, 0.08);
   }
 }

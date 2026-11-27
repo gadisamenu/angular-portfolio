@@ -1,27 +1,151 @@
 <section id="about" class="about glass-panel">
+  <!-- Header -->
   <header class="about__header">
-    <ng-icon name="lucideUser" size="16" />
-    <h2>About me</h2>
+    <div class="about__title-row">
+      <span class="about__icon-badge">
+        <ng-icon name="lucideUser" size="18" />
+      </span>
+      <div>
+        <h2>About & Engineering Philosophy</h2>
+        <p class="about__subtitle">
+          Background, core competencies, and how I approach engineering solutions.
+        </p>
+      </div>
+    </div>
   </header>
 
-  <div class="about__body">
-    <div class="about__intro">
-      <h3>{{ state.profile.aboutHeading }}</h3>
-      <p>{{ state.profile.aboutBody }}</p>
-    </div>
+  <!-- Bento Layout Grid -->
+  <div class="about__bento">
+    <!-- Story Card -->
+    <article class="about-card about-card--story">
+      <div class="about-card__header">
+        <span class="about-card__tag">Profile & Story</span>
+      </div>
 
-    <div class="about__stats">
-      @for (stat of state.stats; track stat.id) {
-        <div class="about__stat">
-          <span class="about__stat-icon">
-            <ng-icon [name]="stat.icon" size="16" />
+      <h3 class="about-card__headline">
+        I turn complex architectural challenges into reliable, high-impact products.
+      </h3>
+
+      <div class="about-card__narrative">
+        <p>
+          I am a Software Engineering graduate specializing in Artificial Intelligence from
+          <strong>Addis Ababa Institute of Technology (AAiT)</strong>, graduating with a
+          <strong>3.73 / 4.0 CGPA</strong>. My development career combines algorithmic precision with
+          rigorous product craftsmanship.
+        </p>
+        <p>
+          From scaling high-volume multi-store eCommerce storefronts serving thousands of users daily
+          at <strong>Solid Lift Parts</strong>, to architecting event-driven maternal health pipelines at
+          <strong>A2SV</strong>, I build systems engineered for low latency, zero downtime, and clean maintainability.
+        </p>
+      </div>
+
+      <!-- Beyond the code interests -->
+      <div class="about-card__interests">
+        <span class="interests-label">When I am not coding:</span>
+        <div class="interests-pills">
+          <span class="interest-pill">🚴 Road Cycling</span>
+          <span class="interest-pill">⚽ Football</span>
+          <span class="interest-pill">🎬 Cinema</span>
+          <span class="interest-pill">💡 Algorithmic Puzzles</span>
+          <span class="interest-pill">🤖 Applied AI</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 Core Engineering Pillars -->
+    <article class="about-card about-card--pillars">
+      <div class="about-card__header">
+        <span class="about-card__tag">Core Pillars</span>
+      </div>
+
+      <div class="pillars-list">
+        <div class="pillar-item">
+          <span class="pillar-icon pillar-icon--server">
+            <ng-icon name="lucideServer" size="16" />
           </span>
-          <div>
-            <p class="about__stat-label">{{ stat.label }}</p>
-            <p class="about__stat-value">{{ stat.value }}</p>
+          <div class="pillar-content">
+            <h4>Scalable Distributed Backends</h4>
+            <p>
+              Event-driven message queues (Pub/Sub, RabbitMQ), ASP.NET Core & Node/Express microservices,
+              and optimized SQL/NoSQL schemas.
+            </p>
           </div>
         </div>
-      }
+
+        <div class="pillar-item">
+          <span class="pillar-icon pillar-icon--frontend">
+            <ng-icon name="lucideLayout" size="16" />
+          </span>
+          <div class="pillar-content">
+            <h4>Modern Reactive Frontends</h4>
+            <p>
+              Component design systems, fine-grained state management, and accessible client workflows with
+              Angular, React/Next.js, and Flutter.
+            </p>
+          </div>
+        </div>
+
+        <div class="pillar-item">
+          <span class="pillar-icon pillar-icon--ai">
+            <ng-icon name="lucideCpu" size="16" />
+          </span>
+          <div class="pillar-content">
+            <h4>Algorithmic Rigor & Applied AI</h4>
+            <p>
+              800+ solved problems on LeetCode & Codeforces. Deep academic and hands-on grounding in machine
+              learning and system design.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Key Milestone Metrics Grid -->
+    <div class="about__metrics-grid">
+      <div class="metric-card">
+        <span class="metric-card__icon">
+          <ng-icon name="lucideBinary" size="18" />
+        </span>
+        <div class="metric-card__body">
+          <span class="metric-card__val">800+ Solved</span>
+          <span class="metric-card__label">Competitive Programming</span>
+          <span class="metric-card__sub">LeetCode & Codeforces</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <span class="metric-card__icon">
+          <ng-icon name="lucideGraduationCap" size="18" />
+        </span>
+        <div class="metric-card__body">
+          <span class="metric-card__val">3.73 / 4.0</span>
+          <span class="metric-card__label">BSc Software Eng · AI</span>
+          <span class="metric-card__sub">AAiT University Distinction</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <span class="metric-card__icon">
+          <ng-icon name="lucideBriefcase" size="18" />
+        </span>
+        <div class="metric-card__body">
+          <span class="metric-card__val">5+ Years</span>
+          <span class="metric-card__label">Software Engineering</span>
+          <span class="metric-card__sub">Production & Open Source</span>
+        </div>
+      </div>
+
+      <button type="button" class="metric-card metric-card--action" (click)="openAvailability()">
+        <span class="metric-card__icon metric-card__icon--beacon">
+          <ng-icon name="lucideCircleDot" size="18" />
+        </span>
+        <div class="metric-card__body">
+          <span class="metric-card__val">Available</span>
+          <span class="metric-card__label">Open to Opportunities</span>
+          <span class="metric-card__sub">Full-time & Remote Roles →</span>
+        </div>
+      </button>
     </div>
   </div>
 </section>

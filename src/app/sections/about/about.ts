@@ -2,10 +2,15 @@ import { Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideUser,
-  lucideBriefcase,
   lucideGraduationCap,
+  lucideBriefcase,
   lucideBinary,
   lucideCircleDot,
+  lucideServer,
+  lucideLayout,
+  lucideCpu,
+  lucideArrowRight,
+  lucideSparkles,
 } from '@ng-icons/lucide';
 
 import { PortfolioStateService } from '../../core/portfolio-state.service';
@@ -15,11 +20,30 @@ import { PortfolioStateService } from '../../core/portfolio-state.service';
   standalone: true,
   imports: [NgIcon],
   providers: [
-    provideIcons({ lucideUser, lucideBriefcase, lucideGraduationCap, lucideBinary, lucideCircleDot }),
+    provideIcons({
+      lucideUser,
+      lucideGraduationCap,
+      lucideBriefcase,
+      lucideBinary,
+      lucideCircleDot,
+      lucideServer,
+      lucideLayout,
+      lucideCpu,
+      lucideArrowRight,
+      lucideSparkles,
+    }),
   ],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
 export class About {
   constructor(readonly state: PortfolioStateService) {}
+
+  openAvailability(): void {
+    this.state.openWindow('availability');
+  }
+
+  openResume(): void {
+    this.state.openWindow('resume');
+  }
 }

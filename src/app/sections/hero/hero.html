@@ -2,27 +2,47 @@
   <div class="hero__scenery" aria-hidden="true"></div>
 
   <div class="hero__inner">
+    <!-- Left: Copy & Actions -->
     <div class="hero__copy">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        <span>Software Engineering & AI · AAiT Graduate</span>
+      </div>
+
       <h1 class="hero__title">
         Hi, I'm <span class="hero__title-accent">{{ state.profile.firstName }}</span>.<br />
-        I build reliable products<br />
-        across web, backend, and AI.
+        I engineer scalable backends<br />
+        & modern web products.
       </h1>
+
       <p class="hero__subtitle">
-        {{ state.profile.subtitle }}
+        {{ state.profile.subtitle }} Passionate about competitive programming, high-throughput distributed systems, and applying machine learning to real products.
       </p>
 
       <div class="hero__actions">
-        <button type="button" class="hero__btn hero__btn--primary" (click)="viewWork()">
-          View my work
+        <button type="button" class="hero__btn hero__btn--primary" (click)="scrollToWork()">
+          Explore Featured Work
           <ng-icon name="lucideArrowRight" size="15" />
         </button>
+
         <button type="button" class="hero__btn hero__btn--secondary" (click)="downloadResume()">
-          Download resume
+          <ng-icon name="lucideFileText" size="15" />
+          View CV
+        </button>
+
+        <button
+          type="button"
+          class="hero__btn hero__btn--tertiary"
+          (click)="copyEmail()"
+          [title]="emailCopied() ? 'Email copied!' : 'Copy email address'"
+        >
+          <ng-icon [name]="emailCopied() ? 'lucideCheck' : 'lucideCopy'" size="14" />
+          <span>{{ emailCopied() ? 'Email Copied!' : 'Copy Email' }}</span>
         </button>
       </div>
     </div>
 
+    <!-- Right: macOS Developer System Profile Card -->
     <div class="hero__card">
       <div class="hero__card-titlebar">
         <span class="traffic-lights">
@@ -30,38 +50,103 @@
           <span class="yellow"></span>
           <span class="green"></span>
         </span>
+        <span class="hero__card-filename">gadisa-profile.json</span>
       </div>
 
       <div class="hero__card-body">
-        <button
-          type="button"
-          class="hero__avatar-ring"
-          (click)="openPhoto()"
-          [attr.aria-label]="'View photo of ' + state.profile.name"
-        >
-          <div class="hero__avatar">
-            <img [src]="state.profile.avatarUrl" alt="" />
+        <!-- Identity Row -->
+        <div class="hero__identity">
+          <button
+            type="button"
+            class="hero__avatar-ring"
+            (click)="openPhoto()"
+            [attr.aria-label]="'View photo of ' + state.profile.name"
+            title="Click to view photo"
+          >
+            <div class="hero__avatar">
+              <img [src]="state.profile.avatarUrl" alt="Gadisa Amenu portrait" />
+            </div>
+            <span class="hero__avatar-beacon"></span>
+          </button>
+
+          <div class="hero__identity-info">
+            <h2 class="hero__card-name">{{ state.profile.name }}</h2>
+            <p class="hero__card-role">{{ state.profile.title }}</p>
+
+            <button type="button" class="hero__card-status" (click)="showAvailability()" title="Click to view availability details">
+              <span class="status-pulse"></span>
+              <span>Available for Work</span>
+            </button>
           </div>
-        </button>
+        </div>
 
-        <h2 class="hero__card-name">{{ state.profile.title }}</h2>
-        <button type="button" class="hero__card-status" (click)="showAvailability()">
-          <span>Based in {{ state.profile.location }}</span>
-          <span class="hero__card-dot" aria-hidden="true"></span>
-          <span>Available for work</span>
-        </button>
+        <!-- Quick Specs -->
+        <div class="hero__specs">
+          <div class="hero__spec-item">
+            <ng-icon name="lucideMapPin" size="13" />
+            <span>Addis Ababa, ET · Remote Friendly</span>
+          </div>
+          <div class="hero__spec-item">
+            <ng-icon name="lucideGraduationCap" size="13" />
+            <span>BSc Software Eng (AI) · 3.73 CGPA</span>
+          </div>
+          <div class="hero__spec-item">
+            <ng-icon name="lucideBinary" size="13" />
+            <span>800+ Solved (LeetCode & Codeforces)</span>
+          </div>
+        </div>
 
+        <!-- Primary Tech Drivers -->
+        <div class="hero__stack">
+          <span class="hero__stack-label">Core Stack:</span>
+          <div class="hero__stack-pills">
+            <span class="stack-pill">Angular</span>
+            <span class="stack-pill">React</span>
+            <span class="stack-pill">ASP.NET</span>
+            <span class="stack-pill">Express</span>
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">GCP</span>
+          </div>
+        </div>
+
+        <!-- Social Dock -->
         <div class="hero__social">
-          <a class="hero__social-btn" [href]="state.profile.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <a
+            class="hero__social-btn"
+            [href]="state.profile.github"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            title="GitHub"
+          >
             <ng-icon name="ionLogoGithub" size="16" />
           </a>
-          <a class="hero__social-btn" [href]="state.profile.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a
+            class="hero__social-btn"
+            [href]="state.profile.linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            title="LinkedIn"
+          >
             <ng-icon name="ionLogoLinkedin" size="16" />
           </a>
-          <a class="hero__social-btn" [href]="state.profile.leetcode" target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+          <a
+            class="hero__social-btn"
+            [href]="state.profile.leetcode"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LeetCode Profile"
+            title="LeetCode (800+ solved)"
+          >
             <ng-icon name="lucideBinary" size="16" />
           </a>
-          <a class="hero__social-btn" [href]="'mailto:' + state.profile.email" aria-label="Email">
+          <a
+            class="hero__social-btn"
+            [href]="'mailto:' + state.profile.email"
+            aria-label="Send Email"
+            title="Send Email"
+          >
             <ng-icon name="lucideMail" size="16" />
           </a>
         </div>
