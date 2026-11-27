@@ -15,11 +15,22 @@ export interface Project {
   repoUrl?: string;
 }
 
+export type SkillCategory = 'frontend' | 'backend' | 'cloud-db' | 'core';
+
+export interface SkillCategoryInfo {
+  id: SkillCategory;
+  name: string;
+  icon: string;
+  summary: string;
+}
+
 export interface SkillItem {
   id: string;
   name: string;
+  category: SkillCategory;
   icon: string;
   color: string;
+  badge?: 'Core' | 'Advanced' | 'Proficient';
 }
 
 export interface ExperienceItem {
@@ -27,7 +38,11 @@ export interface ExperienceItem {
   role: string;
   company: string;
   period: string;
+  location: string;
+  type: string;
   description: string;
+  highlights: string[];
+  technologies: string[];
   current: boolean;
 }
 
@@ -36,7 +51,9 @@ export interface EducationItem {
   school: string;
   degree: string;
   period: string;
+  badge?: string;
   description: string;
+  highlights: string[];
 }
 
 export interface StatItem {
@@ -129,19 +146,60 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+export const SKILL_CATEGORIES: SkillCategoryInfo[] = [
+  {
+    id: 'frontend',
+    name: 'Frontend & Mobile',
+    icon: 'lucideLayout',
+    summary: 'Crafting responsive user interfaces, accessible web apps, and cross-platform clients.',
+  },
+  {
+    id: 'backend',
+    name: 'Backend & Systems',
+    icon: 'lucideServer',
+    summary: 'Developing scalable microservices, RESTful & GraphQL APIs, and robust architectures.',
+  },
+  {
+    id: 'cloud-db',
+    name: 'Databases & Cloud',
+    icon: 'lucideDatabase',
+    summary: 'Managing SQL/NoSQL databases, containerization, and modern serverless cloud infrastructure.',
+  },
+  {
+    id: 'core',
+    name: 'Core & Architecture',
+    icon: 'lucideCpu',
+    summary: 'Algorithmic problem-solving, event-driven messaging, system design, and CI/CD pipelines.',
+  },
+];
+
 export const SKILLS: SkillItem[] = [
-  { id: 'react', name: 'React', icon: 'lucideAtom', color: '#61dafb' },
-  { id: 'angular', name: 'Angular', icon: 'lucideHexagon', color: '#dd0031' },
-  { id: 'typescript', name: 'TypeScript', icon: 'lucideFileCode2', color: '#3178c6' },
-  { id: 'express', name: 'Express', icon: 'lucideServer', color: '#68a063' },
-  { id: 'aspnet', name: 'ASP.NET', icon: 'lucideLayers', color: '#512bd4' },
-  { id: 'python', name: 'Python', icon: 'lucideBrainCircuit', color: '#3776ab' },
-  { id: 'flutter', name: 'Flutter', icon: 'lucideSmartphone', color: '#02569b' },
-  { id: 'postgres', name: 'PostgreSQL', icon: 'lucideDatabase', color: '#336791' },
-  { id: 'mongodb', name: 'MongoDB', icon: 'lucideLeaf', color: '#47a248' },
-  { id: 'docker', name: 'Docker', icon: 'lucideContainer', color: '#2496ed' },
-  { id: 'gcp', name: 'GCP', icon: 'lucideCloud', color: '#4285f4' },
-  { id: 'git', name: 'Git', icon: 'lucideGitBranch', color: '#f05033' },
+  // Frontend & Mobile
+  { id: 'react', name: 'React', category: 'frontend', icon: 'lucideAtom', color: '#61dafb', badge: 'Core' },
+  { id: 'angular', name: 'Angular', category: 'frontend', icon: 'lucideHexagon', color: '#dd0031', badge: 'Core' },
+  { id: 'nextjs', name: 'Next.js', category: 'frontend', icon: 'lucideLayers', color: '#888888', badge: 'Advanced' },
+  { id: 'typescript', name: 'TypeScript', category: 'frontend', icon: 'lucideFileCode2', color: '#3178c6', badge: 'Core' },
+  { id: 'flutter', name: 'Flutter', category: 'frontend', icon: 'lucideSmartphone', color: '#02569b', badge: 'Proficient' },
+
+  // Backend & Systems
+  { id: 'express', name: 'Express / Node.js', category: 'backend', icon: 'lucideServer', color: '#68a063', badge: 'Core' },
+  { id: 'aspnet', name: 'ASP.NET Core', category: 'backend', icon: 'lucideLayers', color: '#512bd4', badge: 'Core' },
+  { id: 'python', name: 'Python', category: 'backend', icon: 'lucideBrainCircuit', color: '#3776ab', badge: 'Advanced' },
+  { id: 'golang', name: 'Go', category: 'backend', icon: 'lucideFileCode2', color: '#00add8', badge: 'Proficient' },
+  { id: 'csharp', name: 'C#', category: 'backend', icon: 'lucideCode', color: '#9b4993', badge: 'Core' },
+
+  // Databases & Cloud
+  { id: 'postgres', name: 'PostgreSQL', category: 'cloud-db', icon: 'lucideDatabase', color: '#336791', badge: 'Core' },
+  { id: 'mongodb', name: 'MongoDB', category: 'cloud-db', icon: 'lucideLeaf', color: '#47a248', badge: 'Core' },
+  { id: 'docker', name: 'Docker', category: 'cloud-db', icon: 'lucideContainer', color: '#2496ed', badge: 'Advanced' },
+  { id: 'gcp', name: 'Google Cloud (GCP)', category: 'cloud-db', icon: 'lucideCloud', color: '#4285f4', badge: 'Advanced' },
+  { id: 'elasticsearch', name: 'Elasticsearch', category: 'cloud-db', icon: 'lucideDatabase', color: '#005571', badge: 'Proficient' },
+
+  // Core & Architecture
+  { id: 'dsa', name: 'Algorithms & DSA', category: 'core', icon: 'lucideBrainCircuit', color: '#f59e0b', badge: 'Core' },
+  { id: 'git', name: 'Git & GitHub', category: 'core', icon: 'lucideGitBranch', color: '#f05033', badge: 'Core' },
+  { id: 'rabbitmq', name: 'RabbitMQ / PubSub', category: 'core', icon: 'lucideLayers', color: '#ff6600', badge: 'Advanced' },
+  { id: 'systemdesign', name: 'System Design', category: 'core', icon: 'lucideCpu', color: '#10b981', badge: 'Advanced' },
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
@@ -150,17 +208,33 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: 'Software Engineer',
     company: 'Solid Lift Parts Inc',
     period: 'Feb 2025 — Dec 2025',
+    location: 'Remote',
+    type: 'Full-time',
     description:
-      'Worked on large-scale multi-store eCommerce serving thousands of users daily — store migrations, React components, APIs, and data migrations.',
-    current: false,
+      'Engineered and scaled multi-tenant eCommerce storefronts and catalog services serving thousands of active users daily.',
+    highlights: [
+      'Migrated legacy multi-store storefronts to modern React architecture with reusable component libraries.',
+      'Designed performant RESTful APIs with Node/Express, MariaDB, and Elasticsearch for low-latency search.',
+      'Orchestrated large-scale zero-downtime data migrations across production product catalogs.',
+    ],
+    technologies: ['React', 'TypeScript', 'Express', 'MariaDB', 'Elasticsearch', 'REST APIs'],
+    current: true,
   },
   {
     id: 'a2sv-backend',
     role: 'Backend Software Engineer',
     company: 'Africa to Silicon Valley',
     period: 'Aug 2024 — Mar 2025',
+    location: 'Addis Ababa, Ethiopia',
+    type: 'Full-time',
     description:
-      'Backend engineer on Adot, a pregnancy-support product. Built APIs, tests, and a Pub/Sub notification system, then deployed on GCP Cloud Run.',
+      'Backend engineer on Adot, a healthcare product supporting mothers through pregnancy and postnatal care journeys.',
+    highlights: [
+      'Architected reliable asynchronous notification flows using Google Cloud Pub/Sub, Cloud Tasks, and Firebase.',
+      'Developed and optimized backend microservice endpoints with Express.js and MongoDB, doubling test coverage.',
+      'Containerized applications and established automated CI/CD deployments targeting GCP Cloud Run.',
+    ],
+    technologies: ['Node.js', 'Express', 'MongoDB', 'GCP Cloud Run', 'Pub/Sub', 'Cloud Tasks', 'Firebase'],
     current: false,
   },
   {
@@ -168,17 +242,33 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: 'Full-stack Developer',
     company: 'Addis Ababa Institute of Technology',
     period: 'Jun 2023 — Mar 2024',
+    location: 'Addis Ababa, Ethiopia',
+    type: 'Contract',
     description:
-      'Full-stack on ORIDMS, automating government admin work with ASP.NET Core, Angular, and PostgreSQL — APIs, aggregations, and UI from wireframes.',
+      'Delivered ORIDMS, an enterprise administrative management system for state planning, statistics, and official documentation.',
+    highlights: [
+      'Built modular, responsive front-end workflows in Angular with fine-grained state management.',
+      'Engineered scalable ASP.NET Core web APIs and structured PostgreSQL schemas for complex bureaucratic data.',
+      'Implemented role-based security permissions ensuring data privacy across governmental tiers.',
+    ],
+    technologies: ['Angular', 'TypeScript', 'ASP.NET Core', 'C#', 'PostgreSQL', 'SCSS'],
     current: false,
   },
   {
     id: 'a2sv-intern',
-    role: 'Backend Engineer Intern',
+    role: 'Backend Engineer Intern & Mentor',
     company: 'Africa to Silicon Valley',
     period: 'Jul 2022 — Jun 2023',
+    location: 'Addis Ababa, Ethiopia',
+    type: 'Internship',
     description:
-      'Built Rate Eat (item-level reviews) and Community (student onboarding) using Express, MongoDB, ASP.NET, React, and Flutter. Also mentored competitive programming students.',
+      'Developed full-stack web and mobile features across internal products while mentoring student cohorts in competitive programming.',
+    highlights: [
+      'Implemented core APIs and interfaces for Rate Eat (restaurant & item-level review platform) with Express and Flutter.',
+      'Co-developed Community onboarding modules using Express, MongoDB, and React.',
+      'Mentored 30+ engineering fellows in advanced algorithms, dynamic programming, and graph theory.',
+    ],
+    technologies: ['Express', 'MongoDB', 'React', 'Flutter', 'Algorithms', 'Mentorship'],
     current: false,
   },
 ];
@@ -187,18 +277,30 @@ export const EDUCATION: EducationItem[] = [
   {
     id: 'aait',
     school: 'Addis Ababa University, AAiT',
-    degree: 'BSc in Software Engineering · AI',
+    degree: 'BSc in Software Engineering · AI Specialization',
     period: 'Sep 2019 — Jul 2024',
+    badge: '3.73 / 4.0 CGPA',
     description:
-      'Graduated from Addis Ababa Institute of Technology specializing in artificial intelligence and machine learning. CGPA: 3.73/4.0.',
+      'Graduated with distinction from Addis Ababa Institute of Technology with an academic focus on Artificial Intelligence and Machine Learning.',
+    highlights: [
+      'Top-tier academic standing with 3.73 / 4.0 Cumulative GPA.',
+      'Graduation Capstone: Blockchain-based NFT marketplace for authentic digital asset monetization.',
+      'Deep coursework in Distributed Systems, Machine Learning, Database Architecture, and Software Design.',
+    ],
   },
   {
     id: 'a2sv-dsa',
-    school: 'Africa to Silicon Valley',
-    degree: 'Data Structures and Algorithms',
+    school: 'Africa to Silicon Valley (A2SV)',
+    degree: 'Algorithms, Data Structures & System Architecture',
     period: 'Nov 2021 — Oct 2022',
+    badge: '800+ Problems Solved',
     description:
-      'Solved around 600 problems on LeetCode and 200 on Codeforces, with a focus on interviews and algorithmic problem-solving.',
+      'Rigorous algorithmic problem solving and interview preparation under Google and Silicon Valley senior engineering mentors.',
+    highlights: [
+      'Solved over 600+ problems on LeetCode and 200+ on Codeforces across greedy algorithms, trees, and graphs.',
+      'Selected into top 5% of applicants from nationwide university software talent pool.',
+      'Promoted to mentor future cohorts in technical problem-solving and mock interviews.',
+    ],
   },
 ];
 
@@ -210,7 +312,7 @@ export const STATS: StatItem[] = [
 ];
 
 export const RESUME_SKILLS =
-  'JavaScript/TypeScript · Python · C# · Go · Dart · Java · React · Angular · Flutter · Express · ASP.NET · Django · Spring Boot · Fiber · PostgreSQL · MongoDB · Docker · GCP · AWS · GraphQL · Git';
+  'JavaScript/TypeScript · Python · C# · Go · Dart · Java · React · Angular · Next.js · Flutter · Express · ASP.NET · PostgreSQL · MongoDB · Docker · GCP · AWS · GraphQL · RabbitMQ · Git';
 
 @Injectable({ providedIn: 'root' })
 export class PortfolioStateService {
@@ -225,6 +327,7 @@ export class PortfolioStateService {
 
   readonly profile = PROFILE;
   readonly projects = PROJECTS;
+  readonly skillCategories = SKILL_CATEGORIES;
   readonly skills = SKILLS;
   readonly experience = EXPERIENCE;
   readonly education = EDUCATION;

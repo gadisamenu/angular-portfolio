@@ -1,17 +1,79 @@
 <section id="skills" class="skills glass-panel">
   <header class="skills__header">
-    <ng-icon name="lucideCode" size="16" />
-    <h2>Skills</h2>
+    <div class="skills__header-left">
+      <div class="skills__title-row">
+        <span class="skills__icon-badge">
+          <ng-icon name="lucideCode" size="18" />
+        </span>
+        <div>
+          <h2>Technical Expertise & Stack</h2>
+          <p class="skills__subtitle">
+            Technologies, frameworks, and architecture patterns I work with daily.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter Controls -->
+    <div class="skills__filters" role="tablist" aria-label="Skill categories">
+      <button
+        type="button"
+        class="skills__filter-btn"
+        [class.skills__filter-btn--active]="activeFilter() === 'all'"
+        (click)="setFilter('all')"
+      >
+        All Stack
+      </button>
+      @for (cat of state.skillCategories; track cat.id) {
+        <button
+          type="button"
+          class="skills__filter-btn"
+          [class.skills__filter-btn--active]="activeFilter() === cat.id"
+          (click)="setFilter(cat.id)"
+        >
+          {{ cat.name }}
+        </button>
+      }
+    </div>
   </header>
 
-  <div class="skills__grid">
-    @for (skill of state.skills; track skill.id) {
-      <div class="skill-tile">
-        <span class="skill-tile__icon" [style.color]="skill.color">
-          <ng-icon [name]="skill.icon" size="20" />
-        </span>
-        <p>{{ skill.name }}</p>
-      </div>
+  <!-- Bento Grid of Skill Categories -->
+  <div class="skills__bento">
+    @for (cat of categories(); track cat.id) {
+      <article class="bento-card">
+        <div class="bento-card__header">
+          <div class="bento-card__title-group">
+            <span class="bento-card__icon">
+              <ng-icon [name]="cat.icon" size="18" />
+            </span>
+            <h3>{{ cat.name }}</h3>
+          </div>
+          <span class="bento-card__count">
+            {{ getSkillsForCategory(cat.id).length }} tools
+          </span>
+        </div>
+
+        <p class="bento-card__summary">{{ cat.summary }}</p>
+
+        <div class="bento-card__skills">
+          @for (skill of getSkillsForCategory(cat.id); track skill.id) {
+            <div class="skill-pill">
+              <span class="skill-pill__icon" [style.color]="skill.color">
+                <ng-icon [name]="skill.icon" size="16" />
+              </span>
+              <span class="skill-pill__name">{{ skill.name }}</span>
+              @if (skill.badge) {
+                <span
+                  class="skill-pill__badge"
+                  [class.skill-pill__badge--core]="skill.badge === 'Core'"
+                >
+                  {{ skill.badge }}
+                </span>
+              }
+            </div>
+          }
+        </div>
+      </article>
     }
   </div>
 </section>

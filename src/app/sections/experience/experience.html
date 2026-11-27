@@ -1,22 +1,143 @@
 <section id="experience" class="experience glass-panel">
   <header class="experience__header">
-    <ng-icon name="lucideBriefcase" size="16" />
-    <h2>Experience</h2>
+    <div class="experience__title-row">
+      <span class="experience__icon-badge">
+        <ng-icon [name]="activeTab() === 'work' ? 'lucideBriefcase' : 'lucideGraduationCap'" size="18" />
+      </span>
+      <div>
+        <h2>Experience & Milestones</h2>
+        <p class="experience__subtitle">
+          Career path, engineering roles, and academic achievements.
+        </p>
+      </div>
+    </div>
+
+    <!-- Segmented Tab Switcher -->
+    <div class="experience__tabs" role="tablist" aria-label="Experience view">
+      <button
+        type="button"
+        class="experience__tab-btn"
+        [class.experience__tab-btn--active]="activeTab() === 'work'"
+        (click)="setTab('work')"
+      >
+        <ng-icon name="lucideBriefcase" size="14" />
+        Work History
+      </button>
+      <button
+        type="button"
+        class="experience__tab-btn"
+        [class.experience__tab-btn--active]="activeTab() === 'education'"
+        (click)="setTab('education')"
+      >
+        <ng-icon name="lucideGraduationCap" size="14" />
+        Education & Milestones
+      </button>
+    </div>
   </header>
 
-  <ol class="experience__timeline">
-    @for (item of state.experience; track item.id) {
-      <li class="experience__item">
-        <span class="experience__marker" [class.experience__marker--current]="item.current"></span>
-        <div class="experience__content">
-          <div class="experience__row">
-            <h3>{{ item.role }}</h3>
-            <span class="experience__period">{{ item.period }}</span>
+  @if (activeTab() === 'work') {
+    <!-- Work Experience Timeline -->
+    <ol class="experience__timeline">
+      @for (item of state.experience; track item.id) {
+        <li class="experience__item">
+          <!-- Timeline indicator node -->
+          <div class="experience__indicator">
+            <span
+              class="experience__marker"
+              [class.experience__marker--current]="item.current"
+            ></span>
           </div>
-          <p class="experience__company">{{ item.company }}</p>
-          <p class="experience__desc">{{ item.description }}</p>
-        </div>
-      </li>
-    }
-  </ol>
+
+          <!-- Experience Card -->
+          <article class="experience-card">
+            <header class="experience-card__header">
+              <div class="experience-card__primary">
+                <div class="experience-card__title-line">
+                  <h3>{{ item.role }}</h3>
+                  <span class="experience-card__type-badge">{{ item.type }}</span>
+                </div>
+                <h4 class="experience-card__company">{{ item.company }}</h4>
+              </div>
+
+              <div class="experience-card__meta">
+                <span class="meta-pill">
+                  <ng-icon name="lucideCalendar" size="13" />
+                  {{ item.period }}
+                </span>
+                <span class="meta-pill">
+                  <ng-icon name="lucideMapPin" size="13" />
+                  {{ item.location }}
+                </span>
+              </div>
+            </header>
+
+            <p class="experience-card__overview">{{ item.description }}</p>
+
+            @if (item.highlights && item.highlights.length) {
+              <ul class="experience-card__highlights">
+                @for (bullet of item.highlights; track bullet) {
+                  <li>
+                    <span class="bullet-icon">
+                      <ng-icon name="lucideCheckCircle2" size="14" />
+                    </span>
+                    <span>{{ bullet }}</span>
+                  </li>
+                }
+              </ul>
+            }
+
+            @if (item.technologies && item.technologies.length) {
+              <div class="experience-card__tags">
+                @for (tech of item.technologies; track tech) {
+                  <span class="tech-tag">{{ tech }}</span>
+                }
+              </div>
+            }
+          </article>
+        </li>
+      }
+    </ol>
+  } @else {
+    <!-- Education & Milestones -->
+    <div class="experience__education-list">
+      @for (edu of state.education; track edu.id) {
+        <article class="education-card">
+          <header class="education-card__header">
+            <div class="education-card__primary">
+              <div class="education-card__title-line">
+                <h3>{{ edu.degree }}</h3>
+                @if (edu.badge) {
+                  <span class="education-card__badge">
+                    <ng-icon name="lucideAward" size="13" />
+                    {{ edu.badge }}
+                  </span>
+                }
+              </div>
+              <h4 class="education-card__school">{{ edu.school }}</h4>
+            </div>
+
+            <span class="meta-pill">
+              <ng-icon name="lucideCalendar" size="13" />
+              {{ edu.period }}
+            </span>
+          </header>
+
+          <p class="education-card__overview">{{ edu.description }}</p>
+
+          @if (edu.highlights && edu.highlights.length) {
+            <ul class="education-card__highlights">
+              @for (bullet of edu.highlights; track bullet) {
+                <li>
+                  <span class="bullet-icon">
+                    <ng-icon name="lucideSparkles" size="14" />
+                  </span>
+                  <span>{{ bullet }}</span>
+                </li>
+              }
+            </ul>
+          }
+        </article>
+      }
+    </div>
+  }
 </section>
