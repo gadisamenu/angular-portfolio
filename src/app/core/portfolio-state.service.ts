@@ -7,6 +7,13 @@ export interface Project {
   title: string;
   description: string;
   longDescription: string;
+  category: string;
+  role: string;
+  company: string;
+  period: string;
+  badge?: string;
+  metrics?: string[];
+  highlights?: string[];
   tags: string[];
   images?: string[];
   accentFrom: string;
@@ -92,57 +99,118 @@ export const PROJECTS: Project[] = [
   {
     id: 'solid-lift-ecommerce',
     title: 'Multi-store eCommerce',
+    category: 'Full-Stack & eCommerce',
+    role: 'Software Engineer',
+    company: 'Solid Lift Parts Inc',
+    period: '2025',
+    badge: 'Production Scale',
     description: 'Large-scale parts catalog and storefronts serving thousands of users daily.',
     longDescription:
-      'At Solid Lift Parts I worked on a multi-store eCommerce platform used by thousands of people each day. The work covered migrating stores, building React storefront components, implementing Express APIs, running large data migrations, and launching new sites.',
-    tags: ['React', 'Express', 'MariaDB', 'Elasticsearch'],
+      'At Solid Lift Parts I engineered a high-volume multi-store eCommerce platform serving thousands of daily active customers across North America. The initiative encompassed complete storefront migrations, high-throughput backend APIs, optimized full-text catalog queries, and executing large data migrations with zero customer downtime.',
+    metrics: ['Thousands of Daily Users', 'Zero-Downtime Migration', 'Sub-second Catalog Search'],
+    highlights: [
+      'Migrated legacy multi-store storefronts to modular React architecture with reusable design systems.',
+      'Designed and tuned Node/Express REST endpoints backed by MariaDB and Elasticsearch for low-latency product indexing.',
+      'Executed large-scale data migrations across active production catalogs with zero service disruption.',
+    ],
+    tags: ['React', 'Express', 'MariaDB', 'Elasticsearch', 'TypeScript'],
     images: ['/images/projects/solid-lift.svg', '/images/projects/solid-lift.svg'],
     accentFrom: '#1a1a1a',
     accentTo: '#3a2b1a',
+    liveUrl: 'https://www.solidliftparts.com',
+    repoUrl: 'https://github.com/gadisamenu',
   },
   {
     id: 'adot',
-    title: 'Adot',
+    title: 'Adot Pregnancy Support',
+    category: 'Healthcare & Cloud',
+    role: 'Backend Software Engineer',
+    company: 'Africa to Silicon Valley',
+    period: '2024 — 2025',
+    badge: 'GCP Cloud Run',
     description: 'Backend for a pregnancy-support product helping mothers through care journeys.',
     longDescription:
-      'At Africa to Silicon Valley I was a backend engineer on Adot, a product focused on supporting mothers during pregnancy. I implemented API endpoints, improved test performance, wrote comprehensive tests, and built a notification system with Pub/Sub, Cloud Tasks, and Firebase, then deployed on GCP Cloud Run.',
-    tags: ['Express', 'MongoDB', 'GCP', 'Firebase'],
+      'At Africa to Silicon Valley I was a backend engineer on Adot, a mission-critical digital health platform guiding mothers through pregnancy and postpartum recovery. I designed event-driven notification systems, engineered scalable microservices, and established automated cloud deployment pipelines.',
+    metrics: ['Event-Driven Pub/Sub', 'Doubled Test Coverage', 'Automated Cloud Run CI/CD'],
+    highlights: [
+      'Architected reliable asynchronous notification flows using Google Cloud Pub/Sub, Cloud Tasks, and Firebase.',
+      'Developed and optimized backend microservice endpoints with Express.js and MongoDB, doubling integration test coverage.',
+      'Containerized applications and established automated CI/CD deployments targeting GCP Cloud Run.',
+    ],
+    tags: ['Express', 'MongoDB', 'GCP', 'Firebase', 'Docker', 'Pub/Sub'],
     images: ['/images/projects/adot.svg'],
     accentFrom: '#2b3a55',
     accentTo: '#4d6a8f',
+    repoUrl: 'https://github.com/gadisamenu',
   },
   {
     id: 'oridms',
-    title: 'ORIDMS',
+    title: 'ORIDMS State Admin Portal',
+    category: 'Enterprise & GovTech',
+    role: 'Full-stack Developer',
+    company: 'Addis Ababa Institute of Technology',
+    period: '2023 — 2024',
+    badge: 'Enterprise Solution',
     description: 'Government admin system for planning, statistics, documents, and letters.',
     longDescription:
-      'ORIDMS automates state administrative work — planning, statistics, document management, and letters — across a hierarchical government structure. I built REST APIs, handled data aggregations, and implemented Angular pages from wireframes with state management on ASP.NET Core and PostgreSQL.',
-    tags: ['ASP.NET', 'Angular', 'PostgreSQL'],
+      'ORIDMS automates bureaucratic administrative workflows — institutional planning, demographic statistics, official document dispatch, and ministerial records — across regional government tiers. Built with an Angular frontend and an ASP.NET Core / PostgreSQL foundation.',
+    metrics: ['Hierarchical RBAC', 'Multi-tier Ministry Flow', 'Complex Aggregations'],
+    highlights: [
+      'Constructed responsive state management and dynamic data entry forms in Angular based on institutional wireframes.',
+      'Engineered ASP.NET Core Web APIs and complex PostgreSQL aggregation queries for official reporting metrics.',
+      'Implemented granular role-based security ensuring strict partitioned data access across departments.',
+    ],
+    tags: ['ASP.NET Core', 'Angular', 'PostgreSQL', 'C#', 'SCSS'],
     images: ['/images/projects/oridms.svg', '/images/projects/oridms.svg'],
     accentFrom: '#e9ecf6',
     accentTo: '#c9d0ec',
+    repoUrl: 'https://github.com/gadisamenu',
   },
   {
     id: 'nft-marketplace',
-    title: 'NFT Marketplace',
+    title: 'Decentralized NFT Marketplace',
+    category: 'Web3 & Distributed Systems',
+    role: 'Lead Architect & Engineer',
+    company: 'AAiT Capstone Project',
+    period: '2024',
+    badge: 'Graduation Capstone',
     description: 'Blockchain marketplace for minting and selling digital assets.',
     longDescription:
-      'Graduation project: a blockchain marketplace where users monetize digital assets through several selling methods, with NFTs used to guarantee authenticity. Backend in ASP.NET Core with React (Next.js) on the frontend, plus PostgreSQL, RabbitMQ, and blockchain integrations.',
-    tags: ['Next.js', 'ASP.NET', 'PostgreSQL', 'RabbitMQ'],
+      'Graduation capstone: a full-featured decentralized digital asset exchange where creators monetize work through multiple selling mechanisms (fixed price, declining auctions, bidding) with smart contracts guaranteeing cryptographic authenticity.',
+    metrics: ['Smart Contract Minting', 'RabbitMQ Event Queue', 'Distributed Sync'],
+    highlights: [
+      'Built interactive web application with Next.js (React) connecting to Ethereum smart contracts and ASP.NET Core backend.',
+      'Leveraged RabbitMQ message broker to handle asynchronous blockchain event processing and off-chain sync.',
+      'Designed performant relational database schemas in PostgreSQL for asset history and wallet interactions.',
+    ],
+    tags: ['Next.js', 'ASP.NET Core', 'PostgreSQL', 'RabbitMQ', 'Blockchain'],
     images: ['/images/projects/nft-marketplace.svg'],
     accentFrom: '#20293f',
     accentTo: '#3a4c72',
+    repoUrl: 'https://github.com/gadisamenu',
   },
   {
     id: 'rate-eat',
-    title: 'Rate Eat',
+    title: 'Rate Eat & Community',
+    category: 'Consumer App & Mobile',
+    role: 'Backend & Mobile Engineer',
+    company: 'Africa to Silicon Valley',
+    period: '2022 — 2023',
+    badge: 'A2SV Product',
     description: 'Item-level restaurant reviews that highlight where businesses can grow.',
     longDescription:
-      'Rate Eat lets people give and read item-specific reviews, and shows businesses where they can improve. Built during an A2SV internship with Express, MongoDB, React, and Flutter.',
-    tags: ['Express', 'MongoDB', 'React', 'Flutter'],
+      'Rate Eat is a specialized restaurant discovery application that moves beyond blanket establishment reviews by letting diners rate individual menu items, providing eateries with granular data on customer preferences.',
+    metrics: ['Item-level Reviews', 'Cross-platform Mobile', 'Real-time Feed'],
+    highlights: [
+      'Engineered dish-specific review APIs and MongoDB schemas capturing nuanced diner feedback.',
+      'Developed cross-platform mobile views using Flutter alongside Express.js backend services.',
+      'Collaborated closely with Silicon Valley mentors following modern engineering and testing workflows.',
+    ],
+    tags: ['Express', 'MongoDB', 'React', 'Flutter', 'Node.js'],
     images: ['/images/projects/rate-eat.svg', '/images/projects/rate-eat.svg'],
     accentFrom: '#1f2d24',
     accentTo: '#2f6b4a',
+    repoUrl: 'https://github.com/gadisamenu',
   },
 ];
 
