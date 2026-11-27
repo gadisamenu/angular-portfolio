@@ -75,7 +75,7 @@ export const PROFILE = {
   firstName: 'Gadisa',
   title: 'Full Stack Developer',
   initials: 'GA',
-  email: 'gadisamenu99@gmail.com',
+  email: 'amegadbay@gmail.com',
   phone: '+251 988 622 329',
   phoneHref: 'tel:+251988622329',
   location: 'Ethiopia',
@@ -117,7 +117,7 @@ export const PROJECTS: Project[] = [
     images: ['/images/projects/solid-lift.svg', '/images/projects/solid-lift.svg'],
     accentFrom: '#1a1a1a',
     accentTo: '#3a2b1a',
-    liveUrl: 'https://www.solidliftparts.com',
+    liveUrl: 'https://www.liftpartswarehouse.com',
     repoUrl: 'https://github.com/gadisamenu',
   },
   {

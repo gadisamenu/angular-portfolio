@@ -1,52 +1,217 @@
 <div class="window-backdrop" (click)="close()">
-  <section class="finder-window" role="dialog" aria-label="All projects" (click)="$event.stopPropagation()">
+  <section
+    class="finder-window"
+    [class.finder-window--maximized]="isMaximized()"
+    role="dialog"
+    aria-label="All projects Finder"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- macOS Titlebar -->
     <header class="finder-window__titlebar">
-      <span class="traffic-lights">
-        <span class="red" (click)="close()"></span>
-        <span class="yellow"></span>
-        <span class="green"></span>
-      </span>
-      <span class="finder-window__title">All Projects</span>
+      <div class="finder-window__controls">
+        <span class="traffic-lights">
+          <span class="red" (click)="close()" title="Close (Esc)"></span>
+          <span class="yellow" (click)="close()" title="Minimize"></span>
+          <span class="green" (click)="toggleMaximize()" title="Toggle full window"></span>
+        </span>
+      </div>
+
+      <div class="finder-window__title">
+        <span>Projects — {{ selectedCategoryTitle() }}</span>
+      </div>
+
       <button type="button" class="finder-window__close" (click)="close()" aria-label="Close">
         <ng-icon name="lucideX" size="14" />
       </button>
     </header>
 
+    <!-- macOS Toolbar -->
+    <div class="finder-window__toolbar">
+      <!-- Left: Navigation Arrows -->
+      <div class="finder-toolbar__nav">
+        <button
+          type="button"
+          class="toolbar-btn"
+          (click)="setCategory('all')"
+          [disabled]="selectedCategory() === 'all'"
+          title="All Projects"
+        >
+          <ng-icon name="lucideChevronLeft" size="14" />
+        </button>
+      </div>
+
+      <!-- Center: View Mode Segmented Control (Grid vs List) -->
+      <div class="finder-toolbar__views" role="group" aria-label="View style">
+        <button
+          type="button"
+          class="view-btn"
+          [class.view-btn--active]="viewMode() === 'grid'"
+          (click)="setViewMode('grid')"
+          title="Grid view"
+          aria-label="Grid view"
+        >
+          <ng-icon name="lucideLayoutGrid" size="14" />
+          <span class="view-label">Grid</span>
+        </button>
+        <button
+          type="button"
+          class="view-btn"
+          [class.view-btn--active]="viewMode() === 'list'"
+          (click)="setViewMode('list')"
+          title="List view"
+          aria-label="List view"
+        >
+          <ng-icon name="lucideList" size="14" />
+          <span class="view-label">List</span>
+        </button>
+      </div>
+
+      <!-- Right: Search Filter Input -->
+      <div class="finder-toolbar__search">
+        <ng-icon name="lucideSearch" size="13" class="search-icon" />
+        <input
+          type="text"
+          placeholder="Filter projects or tech..."
+          [ngModel]="searchQuery()"
+          (ngModelChange)="updateSearch($event)"
+          aria-label="Filter projects"
+        />
+        @if (searchQuery()) {
+          <button type="button" class="search-clear" (click)="clearSearch()" aria-label="Clear search">
+            <ng-icon name="lucideX" size="11" />
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Main Body: Sidebar + File Area -->
     <div class="finder-window__body">
+      <!-- Finder Sidebar -->
       <aside class="finder-window__sidebar">
-        <p class="finder-window__sidebar-label">Favorites</p>
-        <div class="finder-window__sidebar-item finder-window__sidebar-item--active">
-          <ng-icon name="lucideFolder" size="14" />
-          <span>All Projects</span>
-        </div>
-        <div class="finder-window__sidebar-item">
-          <ng-icon name="lucideStar" size="14" />
-          <span>Featured</span>
-        </div>
-        <div class="finder-window__sidebar-item">
-          <ng-icon name="lucideClock" size="14" />
-          <span>Recent</span>
-        </div>
-      </aside>
-
-      <div class="finder-window__main">
-        <div class="finder-window__toolbar">
-          <span>{{ state.projects.length }} items</span>
-          <div class="finder-window__view-toggle">
-            <ng-icon name="lucideLayoutGrid" size="14" />
-            <ng-icon name="lucideList" size="14" />
-          </div>
-        </div>
-
-        <div class="finder-window__grid">
-          @for (project of state.projects; track project.id) {
-            <button type="button" class="finder-file" (click)="select(project)">
-              <img class="finder-file__image" [src]="project.images?.[0]" [alt]="project.title + ' screenshot'" />
-              <span class="finder-file__name">{{ project.title }}</span>
-              <span class="finder-file__meta">{{ project.tags.join(', ') }}</span>
+        <p class="finder-window__sidebar-label">Categories</p>
+        <div class="sidebar-group">
+          @for (item of sidebarItems; track item.id) {
+            <button
+              type="button"
+              class="finder-window__sidebar-item"
+              [class.finder-window__sidebar-item--active]="selectedCategory() === item.id"
+              (click)="setCategory(item.id)"
+            >
+              <ng-icon [name]="item.icon" size="14" />
+              <span>{{ item.label }}</span>
             </button>
           }
         </div>
+      </aside>
+
+      <!-- Finder Content Area -->
+      <div class="finder-window__main">
+        <!-- GRID VIEW -->
+        @if (viewMode() === 'grid') {
+          <div class="finder-window__grid">
+            @for (project of filteredProjects(); track project.id) {
+              <article class="finder-card" (click)="select(project)" tabindex="0" (keydown.enter)="select(project)">
+                <div class="finder-card__preview">
+                  <img
+                    class="finder-card__image"
+                    [src]="project.images?.[0]"
+                    [alt]="project.title + ' preview'"
+                    loading="lazy"
+                  />
+                  @if (project.badge) {
+                    <span class="finder-card__badge">{{ project.badge }}</span>
+                  }
+                </div>
+
+                <div class="finder-card__info">
+                  <h4 class="finder-card__title">{{ project.title }}</h4>
+                  <p class="finder-card__role">{{ project.role }} · {{ project.company }}</p>
+
+                  <div class="finder-card__tags">
+                    @for (tag of project.tags.slice(0, 3); track tag) {
+                      <span class="finder-card__tag">{{ tag }}</span>
+                    }
+                  </div>
+                </div>
+              </article>
+            } @empty {
+              <div class="finder-empty">
+                <p>No projects match your search "{{ searchQuery() }}".</p>
+                <button type="button" class="finder-empty__btn" (click)="clearSearch()">Reset search</button>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- LIST VIEW -->
+        @if (viewMode() === 'list') {
+          <div class="finder-window__list-container">
+            <table class="finder-table">
+              <thead>
+                <tr>
+                  <th class="th-name">Project Name</th>
+                  <th class="th-role">Role & Organization</th>
+                  <th class="th-tech">Tech Stack</th>
+                  <th class="th-date">Timeline</th>
+                  <th class="th-action"></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (project of filteredProjects(); track project.id) {
+                  <tr class="finder-row" (click)="select(project)">
+                    <td class="td-name">
+                      <div class="cell-name">
+                        <img
+                          class="row-thumb"
+                          [src]="project.images?.[0]"
+                          [alt]="project.title + ' icon'"
+                        />
+                        <div class="row-title-group">
+                          <span class="row-title">{{ project.title }}</span>
+                          <span class="row-category">{{ project.category }}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="td-role">
+                      <span class="row-role-text">{{ project.role }}</span>
+                      <span class="row-company-text">{{ project.company }}</span>
+                    </td>
+                    <td class="td-tech">
+                      <div class="row-tags">
+                        @for (tag of project.tags.slice(0, 3); track tag) {
+                          <span class="row-tag">{{ tag }}</span>
+                        }
+                      </div>
+                    </td>
+                    <td class="td-date">
+                      <span class="row-date">{{ project.period }}</span>
+                    </td>
+                    <td class="td-action">
+                      <span class="row-action-btn">
+                        <span>Inspect</span>
+                        <ng-icon name="lucideArrowRight" size="12" />
+                      </span>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="5" class="finder-empty">
+                      <p>No projects match your search "{{ searchQuery() }}".</p>
+                      <button type="button" class="finder-empty__btn" (click)="clearSearch()">Reset search</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+
+        <!-- Finder Status Footer -->
+        <footer class="finder-window__statusbar">
+          <span>{{ filteredProjects().length }} of {{ state.projects.length }} items</span>
+          <span class="statusbar-divider">·</span>
+          <span>Double-click or tap any project to inspect case study</span>
+        </footer>
       </div>
     </div>
   </section>

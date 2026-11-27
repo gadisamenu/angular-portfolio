@@ -1,5 +1,7 @@
 <header class="menu-bar">
   <div class="menu-bar__left">
+
+    <!-- Apple / Portfolio Logo -->
     <div class="menu-bar__menu">
       <button
         type="button"
@@ -13,18 +15,25 @@
 
       @if (activeMenu() === 'apple') {
         <div class="menu-bar__dropdown">
-          <button type="button" (click)="openAbout()">About This Portfolio</button>
-          <button type="button" (click)="openResume()">Resume…</button>
-          <hr />
-          <button type="button" (click)="setTheme(theme.theme() === 'dark' ? 'light' : 'dark')">
-            {{ theme.theme() === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}
+          <button type="button" (click)="openAbout()">
+            <span class="menu-item__label">About This Portfolio</span>
+          </button>
+          <button type="button" (click)="openResume()">
+            <span class="menu-item__label">View Résumé…</span>
           </button>
           <hr />
-          <button type="button" (click)="scrollToTop()">Restart</button>
+          <button type="button" (click)="setTheme(theme.theme() === 'dark' ? 'light' : 'dark')">
+            <span class="menu-item__label">{{ theme.theme() === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}</span>
+          </button>
+          <hr />
+          <button type="button" (click)="scrollToTop()">
+            <span class="menu-item__label">Restart (Scroll to Top)</span>
+          </button>
         </div>
       }
     </div>
 
+    <!-- Dynamic Menu Items -->
     @for (menu of menus; track menu.id) {
       <div class="menu-bar__menu">
         <button
@@ -38,64 +47,90 @@
 
         @if (activeMenu() === menu.id) {
           <div class="menu-bar__dropdown">
-            @switch (menu.id) {
-              @case ('finder') {
-                <button type="button" (click)="openFinder()">Open Finder — All Projects</button>
-              }
-              @case ('file') {
-                <button type="button" (click)="openResume()">Download Resume…</button>
-              }
-              @case ('edit') {
-                <button type="button" (click)="copyEmail()">
-                  {{ emailCopied() ? 'Copied!' : 'Copy Email Address' }}
+
+            @if (menu.id === 'finder') {
+              <button type="button" (click)="openFinder()">
+                <span class="menu-item__label">Open All Projects</span>
+              </button>
+              <hr />
+              <button type="button" (click)="goToSection('work')">
+                <span class="menu-item__label">Go to Featured Work</span>
+              </button>
+            }
+
+            @if (menu.id === 'file') {
+              <button type="button" (click)="openResume()">
+                <span class="menu-item__label">View Résumé…</span>
+              </button>
+              <button type="button">
+                <a class="menu-item__link" href="/GadisaAmenuCV.pdf" download="GadisaAmenuCV.pdf">
+                  <span class="menu-item__label">Download Résumé</span>
+                </a>
+              </button>
+              <hr />
+              <button type="button" (click)="goToSection('contact')">
+                <span class="menu-item__label">Send a Message…</span>
+              </button>
+            }
+
+            @if (menu.id === 'view') {
+              <button type="button" (click)="setTheme('light')">
+                <span class="menu-bar__check">
+                  @if (theme.theme() === 'light') { <ng-icon name="lucideCheck" size="12" /> }
+                </span>
+                <span class="menu-item__label">Light Mode</span>
+              </button>
+              <button type="button" (click)="setTheme('dark')">
+                <span class="menu-bar__check">
+                  @if (theme.theme() === 'dark') { <ng-icon name="lucideCheck" size="12" /> }
+                </span>
+                <span class="menu-item__label">Dark Mode</span>
+              </button>
+              <hr />
+              <button type="button" (click)="scrollToTop()">
+                <span class="menu-item__label">Scroll to Top</span>
+              </button>
+              <button type="button" (click)="scrollToBottom()">
+                <span class="menu-item__label">Scroll to Bottom</span>
+              </button>
+            }
+
+            @if (menu.id === 'go') {
+              @for (section of sections; track section.id) {
+                <button type="button" (click)="goToSection(section.id)">
+                  <span class="menu-item__label">{{ section.label }}</span>
                 </button>
-              }
-              @case ('view') {
-                <button type="button" (click)="setTheme('light')">
-                  <span class="menu-bar__check">
-                    @if (theme.theme() === 'light') { <ng-icon name="lucideCheck" size="12" /> }
-                  </span>
-                  Light Mode
-                </button>
-                <button type="button" (click)="setTheme('dark')">
-                  <span class="menu-bar__check">
-                    @if (theme.theme() === 'dark') { <ng-icon name="lucideCheck" size="12" /> }
-                  </span>
-                  Dark Mode
-                </button>
-              }
-              @case ('go') {
-                @for (section of sections; track section.id) {
-                  <button type="button" (click)="goToSection(section.id)">{{ section.label }}</button>
-                }
-              }
-              @case ('window') {
-                <button type="button" (click)="scrollToTop()">Scroll to Top</button>
-                <button type="button" (click)="scrollToBottom()">Scroll to Bottom</button>
-              }
-              @case ('help') {
-                <button type="button" (click)="openAvailability()">Availability…</button>
-                <button type="button" (click)="goToSection('contact')">Get in Touch</button>
               }
             }
+
+            @if (menu.id === 'help') {
+              <button type="button" (click)="openAvailability()">
+                <span class="menu-item__label">Availability Status…</span>
+              </button>
+              <button type="button" (click)="goToSection('contact')">
+                <span class="menu-item__label">Get in Touch</span>
+              </button>
+              <hr />
+              <div class="menu-item__info">{{ email }}</div>
+            }
+
           </div>
         }
       </div>
     }
   </div>
 
+  <!-- Right: Search + Clock -->
   <div class="menu-bar__right">
-    <!-- <ng-icon name="lucideWifi" size="15" /> -->
     <ng-icon
       name="lucideSearch"
-      size="15"
+      size="13"
       (click)="openFinder()"
       (keydown.enter)="openFinder()"
       role="button"
       tabindex="0"
       aria-label="Search projects"
     />
-    <!-- <ng-icon name="lucideBatteryFull" size="18" /> -->
     <time class="menu-bar__clock">{{ formattedDate }}</time>
   </div>
 </header>
